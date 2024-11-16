@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full select-none">
+  <div class="w-full select-none h-full flex flex-col">
     <Header />
     <slot />
     <Footer/>
@@ -34,5 +34,14 @@ body {
   scrollbar-width: thin; /* Thin scrollbar */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
 }
+
+html, body {
+  height: 100%;
+}
+
+footer {
+  margin-top: auto;
+}
+
 
 </style>

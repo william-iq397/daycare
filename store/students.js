@@ -8,6 +8,7 @@ export const useStudents = defineStore("useStudents", {
             student_name: "",
             father_name: "",
             mother_name: "",
+            student_id_photo: "",
             student_birthdate: "",
         },
     }),
@@ -43,17 +44,19 @@ export const useStudents = defineStore("useStudents", {
             this.student.student_name = ""
             this.student.father_name = ""
             this.student.mother_name = ""
+            this.student.student_id_photo = ""
             this.student.student_birthdate = ""
         },
 
-        async deleteStudent(id) {
+        async deleteStudent(id, table) {
             const supabase = useSupabaseClient()
             const { error } = await supabase
-                .from("students_request")
+                .from(table)
                 .delete()
                 .eq("id", id)
                 
                 this.fetchStudentsRequests()
+                this.fetchStudents()
         },
 
         async updateStudent(id) {
@@ -65,12 +68,12 @@ export const useStudents = defineStore("useStudents", {
             .select()
 
             
+            
             console.log('Row updated successfully:', data);
-
             this.fetchStudents()
           },
 
-          async acceptStudent(id) {
+        async acceptStudent(id) {
             const supabase = useSupabaseClient();
             
             // Fetch the student data from the 'students-requests' table
@@ -88,10 +91,9 @@ export const useStudents = defineStore("useStudents", {
                 .insert(studentData);
         
         
-            this.deleteStudent(id)
+            // delete the student from request to table after inserting to students table
+            this.deleteStudent(id, 'students_request')
         
-        
-            console.log("Student successfully moved to 'students' table");
         
             // Refresh the lists
             this.fetchStudentsRequests();

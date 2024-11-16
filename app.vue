@@ -1,5 +1,5 @@
 <template>
-    <div class="w-[90%] mx-auto">
+    <div class="w-[90%] mx-auto h-full">
         <NuxtLayout :name="layout">
             <NuxtPage />
         </NuxtLayout>
@@ -16,6 +16,7 @@ const layout = "default"
 }
 
 html {
+    position: relative;
     height: 100%;
     background-color :  rgba(255, 206, 174, 0.281) !important;
 }

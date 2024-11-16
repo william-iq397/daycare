@@ -1,8 +1,7 @@
 // tailwind.config.js
-import { preset } from '@nuxt/ui';
+// import { preset } from '@nuxt/ui';
 
 export default {
-  presets: [preset],  // Add Nuxt UI preset
   content: [
     './components/**/*.{vue,js}',
     './layouts/**/*.vue',

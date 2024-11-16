@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative inline-block text-left border-none text-white bg-blue-700 rounded-3xl md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500 text-xs md:text-xs lg:text-lg cursor-pointer "
+    class="relative inline-block text-left border-none text-white bg-blue-700 rounded-3xl md:bg-transparent md:text-blue-700 md:p-0 text-xs md:text-xs lg:text-lg cursor-pointer "
     @click="display()">
 
     <div
@@ -14,7 +14,7 @@
     <!-- Dropdown -->
     <div :class="{ 'block': isOpen == true, 'hidden': isOpen == false }" class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg  focus:outline-none">
       <div class="py-1 flex flex-col justify-center items-center">
-        <div v-for="page in pages" :to="page.link" :key="page.name" class="text-md py-1 text-center">
+        <div v-for="page in pages" :to="page.link" :key="page.name" class="text-md py-2 text-center">
           <NuxtLink :to="page.link"  :class="{'text-blue-500 outline-none' : route.path == page.link , 'text-gray-700 ' : route.path != page.link}">{{ page.name }}</NuxtLink>
         </div>
       </div>

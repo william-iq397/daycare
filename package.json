@@ -10,7 +10,6 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/ui": "^2.19.2",
     "@nuxtjs/supabase": "^1.4.2",
     "@pinia/nuxt": "^0.7.0",
     "@vueuse/components": "^11.2.0",
@@ -22,5 +21,7 @@
     "vue-router": "latest"
   },
   "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610",
-  "devDependencies": {}
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^6.12.2"
+  }
 }

@@ -1,0 +1,139 @@
+// import { acceptHMRUpdate, defineStore } from "pinia";
+// import { useToastr } from "../components/toastr";
+// export const useAuth = defineStore("authStore", {
+//   state: () => ({
+//     name: null,
+//     email: null,
+//     password: null,
+//     createError: null,
+
+//     admin: false,
+//   }),
+//   getters: {
+//     getCreateError: (state) => state.createError,
+//     isAdmin: () => useSupabaseUser().value?.app_metadata?.userlevel === 100,
+//   },
+
+//   actions: {
+//     validation(register) {
+//       if (this.name?.length < 3 && register) {
+//         this.createError = "الاسم يجب ان يكون اكثر من 3 احرف.";
+//       } else if (!this.email?.includes("@")) {
+//         this.createError = "البريد الالكتروني غير صحيح.";
+//       } else if (this.password?.length < 6) {
+//         this.createError = "كلمة المرور يجب ان تكون اكثر من 6 احرف.";
+//       } else {
+//         this.createError = null;
+//       }
+
+//       if (this.createError) return false;
+//       else return true;
+//     },
+
+//     //Register
+//     async register() {
+//       if (!this.validation(true)) return false;
+
+//       const supabase = useSupabaseClient();
+//       const client = useSupabaseAuthClient();
+//       const { data, error } = await client.auth.signUp({
+//         email: String(this.email),
+//         password: String(this.password),
+//         options: {
+//           data: {
+//             first_name: this.name,
+//           },
+//         },
+//       });
+
+//       if (error) {
+//         this.createError = "هذا البريد الالكتروني مستخدم من قبل.";
+//         return false;
+//       }
+//       this.login();
+//       const toast = useToastr();
+//       toast.success("تم التسجيل بنجاح");
+//     },
+
+//     //login
+//     async login() {
+//       if (!this.validation()) return false;
+
+//       const client = useSupabaseAuthClient();
+//       const { data, error } = await client.auth.signInWithPassword({
+//         email: String(this.email),
+//         password: String(this.password),
+//       });
+
+//       if (error) {
+//         this.createError = "البريد الالكتروني او كلمة المرور غير صحيحة.";
+//         return false;
+//       }
+
+//       const resourcesStore = useResources();
+//       resourcesStore.fetch();
+//       // toast will pop up
+//       const toast = useToastr();
+//       toast.success("تم التسجيل بنجاح");
+//     },
+
+//     //UPDATE USER DATA
+//     async updateUser(name) {
+//       const client = useSupabaseAuthClient();
+//       const user = useSupabaseUser();
+//       const supabase = useSupabaseClient();
+//       const { data, error } = await client.auth.updateUser({
+//         data: {
+//           first_name: name,
+//         },
+//       });
+//       if (error) throw error;
+//       //update profiles
+//       this.updateProfile(name);
+//       const resourcesStore = useResources();
+//       resourcesStore.fetch();
+//       // toast will pop up
+//       const toast = useToastr();
+//       toast.success("تم التسجيل بنجاح");
+//     },
+
+//     //update Profile
+//     async updateProfile(name) {
+//       const user = useSupabaseUser();
+//       const supabase = useSupabaseClient();
+//       const { data, error } = await supabase
+//         .from("profiles")
+//         .update({ first_name: name })
+//         .eq("id", user.value?.id);
+
+//       console.log(data, error);
+//       if (error) throw error;
+//     },
+
+//     // LogOut
+//     async logout() {
+//       const client = useSupabaseAuthClient();
+//       try {
+//         const { error } = await client.auth.signOut();
+//         // toast will pop up
+//         const toast = useToastr();
+//         toast.success("تم التسجيل الخروج بنجاح");
+//       } catch (error) {
+//         console.log(error);
+//       }
+//     },
+
+//     // async get_my_claim() {
+//     //   const supabase = useSupabaseClient();
+
+//     //   const { data, error } = await supabase.rpc("get_my_claims");
+
+//     //   if (data) this.admin = data?.userlevel == 100;
+//     //   return { data, error };
+//     // },
+//   },
+// });
+
+// if (import.meta.hot) {
+//   import.meta.hot.accept(acceptHMRUpdate(useAuth, import.meta.hot));
+// }

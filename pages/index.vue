@@ -2,7 +2,7 @@
    <div class="flex flex-col  gap-12 mt-10">
       <section class="mx-auto w-full relative">
 
-         <img alt="Daycare Center" class="mx-auto" style="width: 100%; height: 40%; object-fit: cover;"
+         <img alt="Daycare Center" class="mx-auto w-full" 
             data-ssr-src-done="true" fetchpriority="high"
             src="https://static.wixstatic.com/media/11062b_1b005544d1b746a1a79fbcf9fd004973~mv2.jpg/v1/fill/w_980,h_593,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_1b005544d1b746a1a79fbcf9fd004973~mv2.jpg">
          <pre
