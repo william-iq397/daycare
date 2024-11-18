@@ -1,9 +1,164 @@
 <template>
-    <div>
-        hello world from the report page
-    </div>
-</template>
+    <div class="flex flex-col justify-between items-center gap-8">
+      <div class="w-72 flex justify-between items-start  gap-4">
+        <input
+          type="search"
+          v-model="useStudent.filter"
+          id="location-search"
+          class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+          placeholder="Search for city or address"
+          required
+        />
 
-<script setup>
+
+        <button type="button" class="p-8 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" @click="print()">طباعة</button>
+
+      </div>
+  
+      <table id="printableTable" class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto border-collapse">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th
+              v-for="head in tableHead"
+              :key="head"
+              class="px-6 py-3 text-[14px] xl:text-[18px]"
+              :class="{'id': head == 'ID'}"
+            >
+              <div :class="head === 'ID' ? 'text-center' : 'text-left'">
+                {{ head }}
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody v-if="filteredStudents.length">
+          <tr
+            v-for="student in filteredStudents"
+            :key="student.id"
+            class="bg-white dark:bg-gray-800 transition-all duration-100 text-[12px] xl:text-[16px]"
+          >
+            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-left">
+              {{ student.student_name }}
+            </th>
+            <td class="px-6 py-4">{{ student.father_name }}</td>
+            <td class="px-6 py-4">{{ student.mother_name }}</td>
+            <td class="px-6 py-4">{{ student.student_birthdate }}</td>
+            <td class="px-6 py-4 flex justify-center items-center image-container">
+              <img
+                v-if="student.student_id_photo"
+                :src="student.student_id_photo"
+                class="h-12 w-12 border border-solid border-black rounded-lg print:w-[100px] print:h-[100px]"
+              />
+              <div v-else class="h-12 text-center flex justify-center items-center">لا يوجد صورة</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </template>
+  
+  <script setup>
+  import { computed, onMounted } from "vue";
+  import { useStudents } from "~/store/students";
+  
+  const useStudent = useStudents();
+  
+  onMounted(() => {
+    useStudent.fetchStudents();
+  });
+
+  function print() {
+    window.print()
+  }
+  
+  const tableHead = ["student name", "father name", "mother name", "birth date", "ID"];
+  
+  // Filtered students based on the search input
+  const filteredStudents = computed(() =>
+    useStudent.students.filter((student) =>
+      JSON.stringify(student).toLowerCase().includes(useStudent.filter.toLowerCase())
+    )
+  );
 
 </script>
+
+<style>
+@media print {
+
+    body * {
+    visibility: hidden;
+  }
+
+  /* Only make the table visible */
+  #printableTable, #printableTable * {
+    visibility: visible;
+  }
+
+  /* Optionally, adjust the table's position and size for printing */
+  #printableTable {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+    table {
+        width: 100%;
+        font-size: 0.875rem; /* Tailwind's text-sm */
+        text-align: left;
+        direction: ltr; /* Tailwind's rtl:text-right */
+        color: #6b7280; /* Tailwind's text-gray-500 */
+        border-collapse: collapse;
+    }
+
+    thead {
+    font-size: 0.75rem; /* Tailwind's text-xs */
+    color: #374151; /* Tailwind's text-gray-700 */
+    background-color: #f9fafb; /* Tailwind's bg-gray-50 */
+    text-transform: uppercase; /* Tailwind's uppercase */
+    }
+
+    .id {
+        text-align: center;
+    }
+
+    tr {
+        border: solid 1px black;
+    }
+
+    th {
+    padding-left: 1.5rem; /* Tailwind's px-6 */
+    padding-right: 1.5rem; /* Tailwind's px-6 */
+    padding-top: 0.75rem; /* Tailwind's py-3 */
+    padding-bottom: 0.75rem; /* Tailwind's py-3 */
+    font-size: 0.875rem; /* Tailwind's text-[14px] */
+    text-align: left;
+    }
+
+    tbody {
+    background-color: white; /* Tailwind's bg-white */
+    color: #6b7280; /* Tailwind's text-gray-500 */
+    font-size: 0.75rem; /* Tailwind's text-[12px] */
+    transition: all 0.1s ease-in-out; /* Tailwind's transition-all duration-100 */
+    }
+
+    td {
+    padding-left: 1.5rem; /* Tailwind's px-6 */
+    padding-right: 1.5rem; /* Tailwind's px-6 */
+    padding-top: 1rem; /* Tailwind's py-4 */
+    padding-bottom: 1rem; /* Tailwind's py-4 */
+    font-size: 0.875rem; /* Tailwind's text-[14px] */
+    }
+
+    .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+    img {
+    height: 7rem; /* Tailwind's h-12 */
+    width: 7rem; /* Tailwind's w-12 */
+    border: 1px solid black; /* Tailwind's border border-solid border-black */
+    border-radius: 0.375rem; /* Tailwind's rounded-lg */
+        }
+}
+</style>

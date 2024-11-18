@@ -11,18 +11,22 @@ export const useStudents = defineStore("useStudents", {
             student_id_photo: "",
             student_birthdate: "",
         },
+        filter: "",
     }),
     getters: {
         getStudentsRequests: (state) => state.studentsRequests,
         getStudents: (state) => state.students,
     },
     actions: {
+    // fetch students requests
         async fetchStudentsRequests() {
             const supabase = useSupabaseClient()
             const { data } = await supabase.from("students_request").select("*").order("created_at", { ascending: false });
 
             this.studentsRequests = data
         },
+
+    // fetch registered students 
 
         async fetchStudents() {
             const supabase = useSupabaseClient()

@@ -27,10 +27,10 @@
                   <div v-else class="h-12 text-center flex justify-center items-center">لا يوجد صورة</div>
                 </td>
                 <td class="text-center">
-                   <button @click="useStudent.acceptStudent(student.id)" class=" hover:border-white transition-all duration-200 p-2  focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Accept</button>
+                   <button @click="useStudent.acceptStudent(student.id)" class=" hover:border-white transition-all duration-200 p-2  focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">قبول</button>
                 </td>
                 <td class="text-center">
-                   <button @click="useStudent.deleteStudent(student.id, 'students_request')" class=" hover:border-white transition-all duration-200 p-2 class=focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Reject</button>
+                   <button @click="useStudent.deleteStudent(student.id, 'students_request')" class=" hover:border-white transition-all duration-200 p-2 class=focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">رفض</button>
                 </td>
              </tr>
           </tbody>

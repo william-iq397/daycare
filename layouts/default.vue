@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full select-none h-full flex flex-col">
+  <div class="w-full select-none h-full flex flex-col relative">
     <Header />
     <slot />
     <Footer/>
