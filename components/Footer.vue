@@ -5,8 +5,8 @@
           <!-- الشعار والعنوان -->
           <NuxtLink to="/" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
             <img 
-              src="https://i.ibb.co/8DScqTq/kids-logo.png" 
-              alt="شعار الأطفال" 
+            src="https://i.ibb.co/ZVhm4vB/kids-drawing.png"
+            alt="شعار الأطفال" 
               class="h-10 rounded-full"
             />
             <span class="self-center text-xl font-bold text-gray-100">روضة المعتمد</span>
@@ -38,17 +38,20 @@
           <div class="flex space-x-4 rtl:space-x-reverse mt-4 sm:mt-0">
             <img
               src="https://i.ibb.co/ZVhm4vB/kids-drawing.png"
+              loading="lazy"
               alt="رسم"
               class="h-10 w-10 rounded-full"
             />
             <img
-              src="https://i.ibb.co/LpRM9rV/kids-balloon.png"
+              src="https://i.ibb.co/ZVhm4vB/kids-drawing.png"
+              loading="lazy"
               alt="بالون"
               class="h-10 w-10 rounded-full"
             />
             <img
-              src="https://i.ibb.co/2YXgB3k/kids-blocks.png"
-              alt="مكعبات"
+            src="https://i.ibb.co/ZVhm4vB/kids-drawing.png"
+            loading="lazy"
+            alt="مكعبات"
               class="h-10 w-10 rounded-full"
             />
           </div>

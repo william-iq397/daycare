@@ -30,8 +30,7 @@ const pages = [
     { name: 'الصفحة الرئيسية', link: '/' },
     { name: 'المعتمد', link: '/almoatamed' },
     { name: 'المناهج', link: '/methodaligies' },
-    { name: 'الملاحضات', link: '/notes' },
-    { name: 'فروعنا', link: '/branches' },
+    { name: 'ملاحضات', link: '/notes' },
     { name: 'تسجيل الطالب', link: '/studentregister' },
     { name: 'تسجيل الدخول', link: '/login' },
 ]

@@ -12,7 +12,7 @@
    أستكشف. العب. تعلم</pre>
       </section>
 
-
+      
       <section class=" flex flex-col justify-between md:flex-row mx-auto">
          <img :src="Kids" class=" h-[600px]  hidden md:block" alt="image">
          <div class="flex flex-col justify-around items-center gap-24 w-full md:w-1/2 text-blue-950">

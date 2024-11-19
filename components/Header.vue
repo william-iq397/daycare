@@ -13,7 +13,7 @@
 
                 <!-- menu for desktop -->
                 <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-                    <ul class="w-full  xl:gap-2 font-medium flex flex-col md:flex-row items-center  p-4 md:p-0 mt-4 border border-gray-100 rounded-3xl bg-[#e98e52]  md:space-x-4 lg:space-x10 rtl:space-x-reverse md:mt-0 md:border-0">
+                    <ul class="w-full  xl:gap-2 font-medium flex flex-col md:flex-row items-center  p-4 md:p-0 mt-4 border border-gray-100 rounded-3xl bg-[#FFCFAE]  md:space-x-4 lg:space-x10 rtl:space-x-reverse md:mt-0 md:border-0">
                         <li class="block py-2 px-3  bg-blue-700 rounded md:bg-transparent md:text-[#213472] md:p-0 text-xs md:text-xs lg:text-lg min-w-fit" v-for="page in pages" :key="page.name" aria-current="page">
                             <NuxtLink class="py-2 px-3 min-w-full" :class="{'text-black': route.path == page.link && showLoginPopup == false, }" :to="page.link">{{ page.name }}</NuxtLink>
                         </li>
@@ -44,6 +44,7 @@ const pages = [
     { name: 'الصفحة الرئيسية', link: '/' },
     { name: 'المعتمد', link: '/almoatamed' },
     { name: 'المناهج', link: '/methodaligies' },
+    { name: 'ملاحضات', link: '/notes' },
     { name: 'تسجيل الطالب', link: '/studentRegister' },
 ]
 
