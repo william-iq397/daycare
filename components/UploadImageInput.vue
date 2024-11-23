@@ -6,12 +6,12 @@
         </label>
         <input
             class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-            id="multiple_files" type="file" @change="handleFileUpload" required />
+            id="multiple_files" type="file" @change="handleFileUpload" required>
 
         <!-- Display Image -->
         <div class="object-cover mx-auto">
             <img  v-if="useStudent.$state.student.student_id_photo"
-                :src="useStudent.$state.student.student_id_photo" alt="Uploaded Image"
+                :src="useStudent.$state.student.student_id_photo" alt="تحميل الصورة"
                 class="mt-4 max-w-xs border border-gray-300 rounded-lg w-40 h-40" />
         </div>
     </div>

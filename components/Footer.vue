@@ -69,6 +69,8 @@ const pages = [
     { name: 'الصفحة الرئيسية', link: '/' },
     { name: 'المعتمد', link: '/almoatamed' },
     { name: 'المناهج', link: '/methodaligies' },
+    { name: 'ملاحضات', link: '/notes' },
+    { name: 'تسجيل الطالب', link: '/studentRegister' },
 ]
 
 const showLoginPopup = ref(false); // Manage visibility of the popup

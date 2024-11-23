@@ -1,5 +1,4 @@
 import { acceptHMRUpdate, defineStore } from "pinia"
-
 export const useStudents = defineStore("useStudents", {
     state: () => ({
         studentsRequests: [],
@@ -67,7 +66,13 @@ export const useStudents = defineStore("useStudents", {
  
             const { data, error } = await supabase
             .from('students')
-            .update(data)
+            .update({
+                student_name: this.student.student_name,
+                father_name: this.student.father_name,
+                mother_name: this.student.mother_name,
+                student_id_photo: this.student.student_id_photo,
+                student_birthdate: this.student.student_birthdate
+            })
             .eq('id', id)
             .select()
 

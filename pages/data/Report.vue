@@ -34,7 +34,7 @@
           <tr
             v-for="student in filteredStudents"
             :key="student.id"
-            class="bg-white dark:bg-gray-800 transition-all duration-100 text-[12px] xl:text-[16px]"
+            class="bg-white dark:bg-gray-800 transition-all duration-100 text-[12px] xl:text-[16px] "
           >
             <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-left">
               {{ student.student_name }}
@@ -46,7 +46,8 @@
               <img
                 v-if="student.student_id_photo"
                 :src="student.student_id_photo"
-                class="h-12 w-12 border border-solid border-black rounded-lg print:w-[100px] print:h-[100px]"
+               @click="openImageModal(student.student_id_photo)"
+                class="h-12 w-12 border border-solid border-black rounded-lg print:w-[150px] print:h-[150px] cursor-pointer"
               />
               <div v-else class="h-12 text-center flex justify-center items-center">لا يوجد صورة</div>
             </td>
@@ -54,6 +55,9 @@
         </tbody>
       </table>
     </div>
+
+    <EditModal :img="openedImage" :isOpen="isOpen" @update:isOpen="isOpen = $event" />
+
   </template>
   
   <script setup>
@@ -69,6 +73,17 @@
   function print() {
     window.print()
   }
+
+  
+  const isOpen = ref(false);
+ const openedImage = ref("");
+ 
+ // Open the modal with the image
+ function openImageModal(image) {
+   openedImage.value = image;
+   isOpen.value = true;
+ }
+ 
   
   const tableHead = ["student name", "father name", "mother name", "birth date", "ID"];
   
@@ -102,7 +117,7 @@
 
     table {
         width: 100%;
-        font-size: 0.875rem; /* Tailwind's text-sm */
+        font-size: 1.275rem ; /* Tailwind's text-sm */
         text-align: left;
         direction: ltr; /* Tailwind's rtl:text-right */
         color: #6b7280; /* Tailwind's text-gray-500 */
@@ -129,14 +144,14 @@
     padding-right: 1.5rem; /* Tailwind's px-6 */
     padding-top: 0.75rem; /* Tailwind's py-3 */
     padding-bottom: 0.75rem; /* Tailwind's py-3 */
-    font-size: 0.875rem; /* Tailwind's text-[14px] */
+    font-size: 1rem !important; /* Tailwind's text-[14px] */
     text-align: left;
     }
 
     tbody {
     background-color: white; /* Tailwind's bg-white */
     color: #6b7280; /* Tailwind's text-gray-500 */
-    font-size: 0.75rem; /* Tailwind's text-[12px] */
+    font-size: 1rem !important; /* Tailwind's text-[12px] */
     transition: all 0.1s ease-in-out; /* Tailwind's transition-all duration-100 */
     }
 
@@ -145,7 +160,7 @@
     padding-right: 1.5rem; /* Tailwind's px-6 */
     padding-top: 1rem; /* Tailwind's py-4 */
     padding-bottom: 1rem; /* Tailwind's py-4 */
-    font-size: 0.875rem; /* Tailwind's text-[14px] */
+    font-size: 1rem !important; /* Tailwind's text-[14px] */
     }
 
     .image-container {

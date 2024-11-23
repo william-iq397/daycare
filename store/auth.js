@@ -1,139 +1,170 @@
-import { acceptHMRUpdate, defineStore } from "pinia";
-import { useToastr } from "../components/toastr";
+import { acceptHMRUpdate, defineStore } from "pinia"
+import { supabase } from "../supabase/index"
+import { useToastr } from "../components/toastr"
+
 export const useAuth = defineStore("authStore", {
-  state: () => ({
-    user_name: null,
-    email: null,
-    password: null,
-    createError: null,
+    state: () => ({
+        user_name: null,
+        email: null,
+        password: null,
+        createError: null,
+        role: "",
 
-    admin: false,
-  }),
-  getters: {
-    getCreateError: (state) => state.createError,
-    isAdmin: () => useSupabaseUser().value?.app_metadata?.userlevel === 100,
-  },
 
-  actions: {
-    validation(register) {
-      if (this.name?.length < 3 && register) {
-        this.createError = "الاسم يجب ان يكون اكثر من 3 احرف.";
-      } else if (!this.email?.includes("@")) {
-        this.createError = "البريد الالكتروني غير صحيح.";
-      } else if (this.password?.length < 6) {
-        this.createError = "كلمة المرور يجب ان تكون اكثر من 6 احرف.";
-      } else {
-        this.createError = null;
-      }
-
-      if (this.createError) return false;
-      else return true;
+    }),
+    getters: {
+        getCreateError: (state) => state.createError,
+        isAdmin: () => useSupabaseUser().value?.app_metadata?.userlevel === 100,
     },
 
-    //Register
-    async register() {
-      if (!this.validation(true)) return false;
+    actions: {
+        validation(register) {
+            if (this.user_name?.length < 3 && register) {
+                this.createError = "الاسم يجب ان يكون اكثر من 3 احرف."
+            } else if (!this.email?.includes("@")) {
+                this.createError = "البريد الالكتروني غير صحيح."
+            } else if (this.password?.length < 6) {
+                this.createError = "كلمة المرور يجب ان تكون اكثر من 6 احرف."
+            } else {
+                this.createError = null
+            }
 
-    //   const supabase = useSupabaseClient();
-      const client = useSupabaseAuthClient();
-      const { data, error } = await client.auth.signUp({
-        email: String(this.email),
-        password: String(this.password),
-        options: {
-          data: {
-            first_name: this.name,
-          },
+            if (this.createError) return false
+            else return true
         },
-      });
 
-      if (error) {
-        this.createError = "هذا البريد الالكتروني مستخدم من قبل.";
-        return false;
-      }
-      this.login();
-      const toast = useToastr();
-      toast.success("تم التسجيل بنجاح");
-    },
+        //Register
 
-    //login
-    async login() {
-      if (!this.validation()) return false;
+        async register() {
+            // Sign up the user with Supabase Authentication
+            const { user, error: authError } = await supabase.auth.signUp({
+                email: this.email,
+                password: this.password,
+            })
 
-      const client = useSupabaseAuthClient();
-      const { data, error } = await client.auth.signInWithPassword({
-        email: String(this.email),
-        password: String(this.password),
-      });
+            if (authError) {
+                console.error("Error signing up:", authError.message)
+                return
+            }
 
-      if (error) {
-        this.createError = "البريد الالكتروني او كلمة المرور غير صحيحة.";
-        return false;
-      }
+            // Insert the user into the 'users' table
+            const { data, error: dbError } = await supabase
+                .from("users")
+                .insert(
+                    {
+                        role: "user", // Default role is 'user'; you can make this 'admin' if needed
+                        user_name: this.user_name,
+                        email: this.email,
+                        password: this.password,
+                    },
+                )
 
-      const resourcesStore = useResources();
-      resourcesStore.fetch();
-      // toast will pop up
-      const toast = useToastr();
-      toast.success("تم التسجيل بنجاح");
-    },
-
-    //UPDATE USER DATA
-    async updateUser(name) {
-      const client = useSupabaseAuthClient();
-      const user = useSupabaseUser();
-      const supabase = useSupabaseClient();
-      const { data, error } = await client.auth.updateUser({
-        data: {
-          first_name: name,
+            const toast = useToastr()
+            toast.success("تم تسجيل حساب جديد")
+            this.fetchUserRole()
         },
-      });
-      if (error) throw error;
-      //update profiles
-      this.updateProfile(name);
-      const resourcesStore = useResources();
-      resourcesStore.fetch();
-      // toast will pop up
-      const toast = useToastr();
-      toast.success("تم التسجيل بنجاح");
+
+        // fetch weather the user is admin or user
+         async  fetchUserRole() {
+            const supabase = useSupabaseClient();
+            const user = useSupabaseUser();
+          
+            if (!user.value) return null;
+          
+            const { data, error } = await supabase
+              .from('users')
+              .select('role')
+              .eq('user_id', user.value.id)
+              .single(); // Fetch the user's role
+          
+            
+            if (data?.role !== 'admin') return;
+            this.role = data.role
+        },
+
+        //login
+        async login() {
+            if (!this.validation()) return false
+            const supabase = useSupabaseClient()
+            // const supa = supabase
+
+            let { data, error } = await supabase?.auth?.signInWithPassword({
+                email: this.email,
+                password: this.password,
+            })
+
+            if (error) {
+                this.createError = error
+                return false
+            }
+
+            // toast will pop up
+            const toast = useToastr()
+            toast.success("تم تسجيل الدخول بنجاح")
+            this.fetchUserRole()
+        },
+
+        //UPDATE USER DATA
+        async updateUser(name) {
+            // const client = useSupabaseAuthClient()
+            // const user = useSupabaseUser()
+            // const supabase = useSupabaseClient()
+            const { data, error } = await supabase.auth.updateUser({
+                data: {
+                    first_name: name,
+                },
+            })
+            if (error) throw error
+            //update profiles
+            this.updateProfile(name)
+            // toast will pop up
+            // const toast = useToastr();
+            // toast.success("تم التسجيل بنجاح");
+        },
+
+        //update Profile
+        async updateProfile(name) {
+            // const user = useSupabaseUser()
+            // const supabase = useSupabase()
+            const { data, error } = await supabase
+                .from("users")
+                .update({ user_name: this.user_name })
+                .eq("id", user.value?.id)
+            console.log(data, error)
+            if (error) throw error
+        },
+
+        // LogOut
+        async logout() {
+            const supabase = useSupabaseClient()
+
+            try {
+                const { error } = await supabase.auth.signOut()
+                const toast = useToastr()
+                toast.success("تم التسجيل الخروج بنجاح")
+            } catch (error) {
+                console.log(error)
+            }
+
+
+            
+            this.user_name = ""
+            this.email = ""
+            this.password = ""
+            this.role = ""
+        },
+
+        // async get_my_claim() {
+        //   const supabase = useSupabase();
+
+        //   const { data, error } = await supabase.rpc("get_my_claims");
+
+        //   if (data) this.admin = data?.userlevel == 100;
+        //   return { data, error };
+        // },
     },
-
-    //update Profile
-    async updateProfile(name) {
-      const user = useSupabaseUser();
-      const supabase = useSupabaseClient();
-      const { data, error } = await supabase
-        .from("profiles")
-        .update({ first_name: name })
-        .eq("id", user.value?.id);
-
-      console.log(data, error);
-      if (error) throw error;
-    },
-
-    // LogOut
-    async logout() {
-      const client = useSupabaseAuthClient();
-      try {
-        const { error } = await client.auth.signOut();
-        // toast will pop up
-        const toast = useToastr();
-        toast.success("تم التسجيل الخروج بنجاح");
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-    // async get_my_claim() {
-    //   const supabase = useSupabaseClient();
-
-    //   const { data, error } = await supabase.rpc("get_my_claims");
-
-    //   if (data) this.admin = data?.userlevel == 100;
-    //   return { data, error };
-    // },
-  },
-});
+})
 
 if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useAuth, import.meta.hot));
+    import.meta.hot.accept(acceptHMRUpdate(useAuth, import.meta.hot))
 }

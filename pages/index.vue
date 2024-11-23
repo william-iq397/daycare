@@ -1,13 +1,13 @@
 <template>
    <div class="flex flex-col  gap-12 mt-10">
-      <section class="mx-auto w-full relative">
+      <section class="mx-auto w-full relative ">
 
          <img alt="Daycare Center" class="mx-auto w-full" 
             data-ssr-src-done="true" fetchpriority="high"
             src="https://static.wixstatic.com/media/11062b_1b005544d1b746a1a79fbcf9fd004973~mv2.jpg/v1/fill/w_980,h_593,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_1b005544d1b746a1a79fbcf9fd004973~mv2.jpg">
         
-            <pre  class=" text-blue-700 font-black text-center text-lg lg:text-xl p-8 bg-[#FFCFAE] bg-opacity-50 rounded-[50%] h-40 md:h-72 lg:flex justify-center items-center hidden  md:flex absolute right-10 top-10 lg:right-40 lg:top-52">مرحباً بِكم في 
-
+            <pre  class="  flex-col text-blue-700 font-black text-center text-lg lg:text-xl p-8 bg-[#FFCFAE] bg-opacity-50 rounded-[50%] h-40 md:h-72 lg:flex justify-center items-center hidden  md:flex absolute right-10 top-10 lg:right-40 lg:top-52">مرحباً بِكم في 
+               <hr class="border border-solid border-blue-950 w-1/2" />
    حضانة و روضة المعتمد الأهلية
    أستكشف. العب. تعلم</pre>
       </section>

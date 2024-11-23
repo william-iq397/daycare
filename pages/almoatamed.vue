@@ -1,5 +1,5 @@
 <template>
-    <section class="flex flex-col justify-between gap-8">
+    <section class="flex flex-col justify-between">
         <div class="flex flex-col sm:flex-row justify-between items-center text-[rgb(33,52,114)] font-bold ">
             <ImagesPlanet />
             <div class="flex flex-col items-center justify-between">
@@ -9,16 +9,18 @@
             <ImagesButterFly />
         </div>
 
-        <hr class="border border-solid border-[rgb(33,52,114)] my-16" />
+        <!-- <hr class="border border-solid border-[rgb(33,52,114)] my-16" /> -->
 
         <Manager />
 
         <hr class="border border-solid border-[rgb(33,52,114)] my-16" />
+        
+        <div class="flex flex-col justify-between gap-20">
+            <Goals />
 
-        <Goals />
+            <hr class="border border-solid border-transparent md:border-[rgb(33,52,114)]  my-16  md:block" />
 
-        <hr class="border border-solid border-[rgb(33,52,114)] my-16" />
-
-        <Staff />
+            <Staff />
+        </div>
     </section>
 </template>

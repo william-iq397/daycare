@@ -15,20 +15,19 @@
     </section>
 
 
-    <section id="comp-m37pqv33" tabindex="-1" class="Oqnisf comp-m37pqv33 wixui-section"
-        data-block-level-container="ClassicSection">
-        <div id="bgLayers_comp-m37pqv33" data-hook="bgLayers" data-motion-part="BG_LAYER" class="MW5IWV">
+    <section tabindex="-1">
+        <div >
             <div data-testid="colorUnderlay" class="LWbAav Kv1aVt"></div>
             <div id="bgMedia_comp-m37pqv33" data-motion-part="BG_MEDIA" class="VgO9Yg"></div>
         </div>
-        <div data-mesh-id="comp-m37pqv33inlineContent" data-testid="inline-content" class="">
-            <h2 class="font_0 wixui-rich-text__text my-8" style="font-size:40px; text-align:center;">
-                <span class="color_41 wixui-rich-text__text">بعض المشاكل</span>
+        <div>
+            <h2 class="my-8" style="font-size:40px; text-align:center;">
+                <span>بعض المشاكل</span>
             </h2>
         </div>
 
-        <section class="relative w-full h-[90%] flex justify-between items-center">
-            <VideoBG class="absolute -z-10 h-full" />
+        <section class="relative w-full h-[50%] flex justify-between items-center">
+            <VideoBG class="absolute -z-10 w-full" />
             <Videos />
         </section>
 

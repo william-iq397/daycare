@@ -1,7 +1,7 @@
 <template>
-    <section class="flex flex-col md:flex-row justify-between  w-full h-full relative ">
+    <section class="flex flex-col md:flex-row w-full h-[650px] relative my-20">
         <ImagesWheat class="absolute top-0 -left-5" />
-        <div class="w-full md:w-[50%] bg-[#f7a56ea8] border border-solid rounded-lg p-6">
+        <div class="w-full md:w-[50%] h-full  bg-[#f7a56ea8] border border-solid rounded-lg p-6">
             <ol class="list-decimal ml-4">
                 <li>توفير تعليم متميز يعتمد على مناهج مبتكرة تسهم في تطوير مهارات التفكير الإبداعي وحب الاستطلاع لدى
                     الأطفال.</li> <br />
@@ -19,10 +19,10 @@
 
         <ImagesDrawHands class="absolute right-[38%] top-[30%] rounded-t-full hidden md:block"  />
 
-        <div class="flex flex-col justify-evenly  w-full h-full md:w-[50%] items-end relative md:overflow-hidden text-right border border-solid rounded-lg p-6">
-            <KidBike class="absolute -z-10 overflow-hidden " />
-            <div class="relative">
-                <ImagesButterFlyTwo class="absolute -bottom-20 md:right-40  -left-[400%]" />
+        <div class="flex flex-col items-end w-full md:w-[50%] h-full relative text-right border border-solid rounded-lg ">
+            <KidBike class="absolute -z-10  h-[650px]" />
+            <div class="relative h-40 py-6">
+                <ImagesButterFlyTwo class="absolute -top-12 right-40" />
                 <h1 class="text-3xl text-right">أهدافنا </h1>
                 <hr class="border border-solid border-[rgb(33,52,114)] w-24 2xl:w-48 ml-auto" />
             </div>

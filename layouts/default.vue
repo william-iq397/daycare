@@ -39,8 +39,8 @@ body {
   /* For Firefox */
   scrollbar-width: thin;
   /* Thin scrollbar */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 
 html,
 body {

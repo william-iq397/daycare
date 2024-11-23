@@ -1,14 +1,10 @@
 <template>
     <div class=" w-[100%] xl:w-[90%] mx-auto h-full">
-        <NuxtLayout :name="layout">
+        <NuxtLayout>
             <NuxtPage />
         </NuxtLayout>
     </div>
 </template>
-
-<script setup>
-const layout = "default"
-</script>
 
 <style>
 #__nuxt {
@@ -18,7 +14,6 @@ const layout = "default"
 html {
     position: relative;
     height: 100%;
-    background-color :  rgba(255, 206, 174, 0.281) !important;
+    background-color: rgba(255, 206, 174, 0.281) !important;
 }
-
 </style>

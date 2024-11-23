@@ -1,5 +1,5 @@
 <template>
-    <section id="comp-m37n9nig" class="comp-m37n9nig CohWsy wixui-column-strip flex flex-col md:flex-row">
+    <section  class="flex flex-col md:flex-row justify-between gap-20 mt-40">
 
         <div class="flex flex-row md:flex-col justify-around">
             <ImagesVectors />
