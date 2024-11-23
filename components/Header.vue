@@ -3,7 +3,7 @@
         <nav class="border-gray-200 w-full">
             <div class="flex justify-around items-center mx-auto w-full">
                 <NuxtLink to="/" class="flex flex-col justify-center items-center w-44">
-                    <img :src="Image" alt="rainbow image" />
+                     <Rainbow/>
                     <span class=" text-2xl font-semibold ">المعتمد</span>
                     <span class="min-w-max p-2">نادي المعتمد للغات والدروس</span>
                 </NuxtLink>
@@ -14,8 +14,8 @@
                 <!-- menu for desktop -->
                 <div class="hidden w-full md:block md:w-auto">  
                     <ul
-                        class="w-full xl:gap-2 font-medium flex flex-col md:flex-row items-center p-4 md:p-0 mt-4 border border-gray-100 rounded-3xl bg-[#FFCFAE] md:space-x-0 lg:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0"> 
-                        <li class="block py-2 px-3 bg-blue-700 rounded md:bg-transparent md:text-[#213472] md:p-0 text-xs md:text-xs lg:text-lg min-w-fit" v-for="page in pages" :key="page.name" aria-current="page">
+                        class="w-full xl:gap-2 font-thin flex flex-col md:flex-row items-center p-4 md:p-0 mt-4 border border-gray-100 rounded-3xl bg-[#FFCFAE] md:space-x-0 lg:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0"> 
+                        <li class="block py-2 px-3 bg-blue-700 rounded md:bg-transparent md:text-[#ff7500] md:p-0 text-xs md:text-xs lg:text-lg min-w-fit" v-for="page in pages" :key="page.name" aria-current="page">
                             <NuxtLink class="py-2 px-3 min-w-full" :class="{ 'text-black': route.path == page.link }" :to="page.link">{{ page.name }}</NuxtLink>
                         </li>
                         <li v-if="auth.role == 'admin'">
@@ -23,13 +23,13 @@
                         </li>
                         <!-- Conditional Login/Logout Button -->
                         <li v-if="user">
-                            <button @click="auth.logout" class="min-w-full bg-blue-700 rounded md:bg-transparent md:text-[#213472] md:p-0 text-xs md:text-xs lg:text-sm">
+                            <button @click="auth.logout" class="min-w-full bg-blue-700 rounded md:bg-transparent md:text-[#ff7500] md:p-0 text-xs md:text-xs lg:text-sm">
                                 تسجيل الخروج
                             </button>
                         </li>
                         <li v-else>
                             <button @click="toggleLoginPopup"
-                                class="min-w-full bg-blue-700 rounded md:bg-transparent md:text-[#213472] md:p-0 text-xs md:text-xs lg:text-sm"
+                                class="min-w-full bg-blue-700 rounded md:bg-transparent md:text-[#ff7500] md:p-0 text-xs md:text-xs lg:text-sm"
                                 :class="{ 'text-black': showLoginPopup, 'text-blue-500': !showLoginPopup }">
                                 تسجيل الدخول
                             </button>
@@ -45,11 +45,10 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
-import Image from "../images/rainbow.png";
 import Login from "~/pages/Login.vue";
 import { useAuth } from '../store/auth';
 import { supabase } from '../supabase';
-import { onMounted, watchEffect } from 'vue';
+import Rainbow from './Rainbow.vue';
 
 const showLoginPopup = ref(false)
 const auth = useAuth();
