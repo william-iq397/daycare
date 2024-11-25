@@ -1,6 +1,6 @@
 <template>
     <header class="border border-solid border-black mt-10 w-full mb-20 text-[#213472]">
-        <nav class="border-gray-200 w-full">
+        <nav class="border-gray-200 w-full">  <span v-if="user">{{ user.email }} {{ auth.user_name|| "hello" }} </span>
             <div class="flex justify-around items-center mx-auto w-full">
                 <NuxtLink to="/" class="flex flex-col justify-center items-center w-44">
                      <Rainbow/>
@@ -28,9 +28,7 @@
                             </button>
                         </li>
                         <li v-else>
-                            <button @click="toggleLoginPopup"
-                                class="min-w-full bg-blue-700 rounded md:bg-transparent md:text-[#ff7500] md:p-0 text-xs md:text-xs lg:text-sm"
-                                :class="{ 'text-black': showLoginPopup, 'text-blue-500': !showLoginPopup }">
+                            <button @click="toggleLoginPopup" class="min-w-full bg-blue-700 rounded md:bg-transparent md:text-[#ff7500] md:p-0 text-xs md:text-xs lg:text-sm" :class="{ 'text-black': showLoginPopup, 'text-blue-500': !showLoginPopup }">
                                 تسجيل الدخول
                             </button>
                             <Login :isVisible="showLoginPopup" :closePopup="toggleLoginPopup" />
@@ -47,34 +45,28 @@
 import { useRoute } from 'vue-router';
 import Login from "~/pages/Login.vue";
 import { useAuth } from '../store/auth';
-import { supabase } from '../supabase';
 import Rainbow from './Rainbow.vue';
+import { supabase } from '../supabase';
 
 const showLoginPopup = ref(false)
 const auth = useAuth();
 const route = useRoute();
 const user = useSupabaseUser()
 // ! TO DO 
-// check if the user is already has an email when he signs up
-// insert the data to the users table when the user signs up with the same id of the auth/users id
+// check if the user tries to log in with non-exist email
+// role based access control
+// add update student
+// after a certian time the status will change from طالب to خريج
+// add filter by status and date to reports
 
-const checkUserStatus = async () => {
-    const { data: { user }, error } = await supabase.auth.getUser();
-    auth.isUserSignedIn = user !== null;
-};
-
+// fetch user role 'admin' or 'user' 
 onMounted(() => {
-    auth.fetchUserRole()
-    supabase.auth.onAuthStateChange(() => {
-        checkUserStatus();
-    });
+    supabase.auth.onAuthStateChange(() => auth.fetchUserRole())
 });
-
 
 // Toggle login popup visibility
 function toggleLoginPopup() {
     showLoginPopup.value = !showLoginPopup.value
-    console.log(showLoginPopup.value)
 }
 
 // Pages for the navbar

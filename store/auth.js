@@ -37,30 +37,34 @@ export const useAuth = defineStore("authStore", {
 
         async register() {
             // Sign up the user with Supabase Authentication
-            const { user, error: authError } = await supabase.auth.signUp({
+            const client = useSupabaseClient()
+            const { user: authData, error: authError } = await client.auth.signUp({
                 email: this.email,
                 password: this.password,
             })
 
             if (authError) {
-                console.error("Error signing up:", authError.message)
+                this.createError = "Error signing up:" + authError.message              
                 return
             }
 
-            // Insert the user into the 'users' table
-            const { data, error: dbError } = await supabase
-                .from("users")
-                .insert(
-                    {
-                        role: "user", // Default role is 'user'; you can make this 'admin' if needed
-                        user_name: this.user_name,
-                        email: this.email,
-                        password: this.password,
-                    },
-                )
+                    // Log the authData to verify the user.id
+            console.log("authData", authData); // Check if user.id exists
+
+            const userId = authData?.user?.id;
+            if (!userId) {
+                console.error("User ID is missing. Check if authData is correct.");
+                return;
+            }
+
+
 
             const toast = useToastr()
-            toast.success("تم تسجيل حساب جديد")
+            setTimeout(() => {
+                toast.info('تم تسجيل حساب جديد بنجاح')                
+            }, 500);
+
+            toast.info('يرجى تسجيل الخروج ثم تسجيل الدخول مرة اخرى')
             this.fetchUserRole()
         },
 
@@ -88,38 +92,18 @@ export const useAuth = defineStore("authStore", {
             const supabase = useSupabaseClient()
             // const supa = supabase
 
-            let { data, error } = await supabase?.auth?.signInWithPassword({
+            const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
                 email: this.email,
                 password: this.password,
-            })
+              });
 
-            if (error) {
-                this.createError = error
-                return false
-            }
+
+           
 
             // toast will pop up
             const toast = useToastr()
             toast.success("تم تسجيل الدخول بنجاح")
             this.fetchUserRole()
-        },
-
-        //UPDATE USER DATA
-        async updateUser(name) {
-            // const client = useSupabaseAuthClient()
-            // const user = useSupabaseUser()
-            // const supabase = useSupabaseClient()
-            const { data, error } = await supabase.auth.updateUser({
-                data: {
-                    first_name: name,
-                },
-            })
-            if (error) throw error
-            //update profiles
-            this.updateProfile(name)
-            // toast will pop up
-            // const toast = useToastr();
-            // toast.success("تم التسجيل بنجاح");
         },
 
         //update Profile
@@ -148,20 +132,8 @@ export const useAuth = defineStore("authStore", {
 
 
             
-            this.user_name = ""
-            this.email = ""
-            this.password = ""
             this.role = ""
         },
-
-        // async get_my_claim() {
-        //   const supabase = useSupabase();
-
-        //   const { data, error } = await supabase.rpc("get_my_claims");
-
-        //   if (data) this.admin = data?.userlevel == 100;
-        //   return { data, error };
-        // },
     },
 })
 

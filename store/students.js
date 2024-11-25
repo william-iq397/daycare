@@ -7,6 +7,10 @@ export const useStudents = defineStore("useStudents", {
             student_name: "",
             father_name: "",
             mother_name: "",
+            father_number: "",
+            mother_number: "",
+            study_status: "",
+            branch: "فرع الجبيلة",
             student_id_photo: "",
             student_birthdate: "",
         },
@@ -47,6 +51,11 @@ export const useStudents = defineStore("useStudents", {
             this.student.student_name = ""
             this.student.father_name = ""
             this.student.mother_name = ""
+            this.father_number = "",
+            this.mother_number = "",
+            this.branch = "فرع الجبيلة",
+            this.study_status = "فرع الجبيلة",
+            this.student_id_photo = "",
             this.student.student_id_photo = ""
             this.student.student_birthdate = ""
         },
@@ -63,7 +72,6 @@ export const useStudents = defineStore("useStudents", {
         },
 
         async updateStudent(id) {
- 
             const { data, error } = await supabase
             .from('students')
             .update({
@@ -75,13 +83,11 @@ export const useStudents = defineStore("useStudents", {
             })
             .eq('id', id)
             .select()
-
-            
-            
             console.log('Row updated successfully:', data);
             this.fetchStudents()
           },
 
+            //accept student and delete him and refresh the page   
         async acceptStudent(id) {
             const supabase = useSupabaseClient();
             
@@ -92,18 +98,12 @@ export const useStudents = defineStore("useStudents", {
                 .eq("id", id)
                 .single(); // Ensure we get a single record
         
-    
-        
             // Insert the fetched student data into the 'students' table
             const { error: insertError } = await supabase
                 .from("students")
                 .insert(studentData);
-        
-        
             // delete the student from request to table after inserting to students table
             this.deleteStudent(id, 'students_request')
-        
-        
             // Refresh the lists
             this.fetchStudentsRequests();
             this.fetchStudents();

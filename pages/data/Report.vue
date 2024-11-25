@@ -21,34 +21,27 @@
             <th
               v-for="head in tableHead"
               :key="head"
-              class="px-6 py-3 text-[14px] xl:text-[18px]"
-              :class="{'id': head == 'ID'}"
+              class="px-6 py-3 text-center text-[14px] xl:text-[18px]"
+              :class="{'id': head == 'الهوية', }"
             >
-              <div :class="head === 'ID' ? 'text-center' : 'text-left'">
+              <div :class="head === 'الهوية' ? 'text-center' : 'text-left'">
                 {{ head }}
               </div>
             </th>
           </tr>
         </thead>
         <tbody v-if="filteredStudents.length">
-          <tr
-            v-for="student in filteredStudents"
-            :key="student.id"
-            class="bg-white dark:bg-gray-800 transition-all duration-100 text-[12px] xl:text-[16px] "
-          >
-            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-left">
-              {{ student.student_name }}
-            </th>
+          <tr v-for="student in filteredStudents" :key="student.id" class="bg-white dark:bg-gray-800 transition-all duration-100 text-[12px] xl:text-[16px] ">
+            <th class="px-6 py-4 font-medium whitespace-nowrap text-left"> {{ student.student_name }} </th>
             <td class="px-6 py-4">{{ student.father_name }}</td>
             <td class="px-6 py-4">{{ student.mother_name }}</td>
-            <td class="px-6 py-4">{{ student.student_birthdate }}</td>
-            <td class="px-6 py-4 flex justify-center items-center image-container">
-              <img
-                v-if="student.student_id_photo"
-                :src="student.student_id_photo"
-               @click="openImageModal(student.student_id_photo)"
-                class="h-12 w-12 border border-solid border-black rounded-lg print:w-[150px] print:h-[150px] cursor-pointer"
-              />
+            <td class="px-6 py-4 birth-date">{{ student.student_birthdate }}</td>
+            <td class="px-6 py-4">{{ student.father_number }}</td>
+            <td class="px-6 py-4">{{ student.mother_number }}</td>
+            <td class="px-6 py-4">{{ student.branch }}</td>
+            <td class="px-6 py-4">{{ student.study_status }}</td>
+            <td class="px-6 py-4 flex justify-center items-center print:w-[300px]">
+              <img v-if="student.student_id_photo" :src="student.student_id_photo" @click="openImageModal(student.student_id_photo)" class="h-12 w-12 border border-solid border-black rounded-lg print:w-[150px] print:h-[150px] cursor-pointer" />
               <div v-else class="h-12 text-center flex justify-center items-center">لا يوجد صورة</div>
             </td>
           </tr>
@@ -85,7 +78,8 @@
  }
  
   
-  const tableHead = ["student name", "father name", "mother name", "birth date", "ID"];
+   const tableHead = ["اسم الطالب", "اسم الاب", "اسم الام", "الميلاد", "رقم الاب", "رقم الام", "الفرع", "الحالة", "الهوية",]
+
   
   // Filtered students based on the search input
   const filteredStudents = computed(() =>
@@ -132,7 +126,12 @@
     }
 
     .id {
+        display:flex;
+        justify-content: center;
+        align-items: center;
         text-align: center;
+        width: 300px;
+        margin-inline: auto;
     }
 
     tr {
@@ -163,6 +162,7 @@
     font-size: 1rem !important; /* Tailwind's text-[14px] */
     }
 
+
     .image-container {
     display: flex;
     justify-content: center;
@@ -170,8 +170,8 @@
     }
 
     img {
-    height: 7rem; /* Tailwind's h-12 */
-    width: 7rem; /* Tailwind's w-12 */
+    height: 5rem; /* Tailwind's h-12 */
+    width: 9rem; /* Tailwind's w-12 */
     border: 1px solid black; /* Tailwind's border border-solid border-black */
     border-radius: 0.375rem; /* Tailwind's rounded-lg */
         }

@@ -12,7 +12,7 @@
         <div class="object-cover mx-auto">
             <img  v-if="useStudent.$state.student.student_id_photo"
                 :src="useStudent.$state.student.student_id_photo" alt="تحميل الصورة"
-                class="mt-4 max-w-xs border border-gray-300 rounded-lg w-40 h-40" />
+                class="mt-4 max-w-xs border border-gray-300 rounded-lg w-80 h-40" />
         </div>
     </div>
 </template>

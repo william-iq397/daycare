@@ -1,10 +1,7 @@
 <template>
     <div v-if="isVisible" class="fixed z-10 inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
         <OnClickOutside @trigger="closePopup">
-      <div 
-        class="bg-white p-8 rounded shadow-lg flex flex-col h-[27rem]" 
-        v-on-click-outside="closePopup"
-      >
+      <div class="bg-white p-8 rounded shadow-lg flex flex-col h-[27rem]" >
         <!-- Tab Buttons -->
         <div class="flex justify-center items-center mb-4">
           <button

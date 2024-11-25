@@ -20,6 +20,15 @@
                    {{ student.mother_name }}
                 </td>
                 <td class="px-6 py-4">
+                   {{ student.father_number }}
+                </td>
+                <td class="px-6 py-4">
+                   {{ student.mother_number }}
+                </td>
+                <td class="px-6 py-4">
+                   {{ student.branch }}
+                </td>
+                <td class="px-6 py-4">
                    {{ student.student_birthdate }}
                 </td>
                 <td class="px-6 py-4 flex justify-center items-center">
@@ -48,6 +57,6 @@
     useStudent.fetchStudentsRequests();
  })
 
- const tableHead = ["student name", "father name", "mother name", "birth date", "ID", "action"]
+ const tableHead = ["اسم الطالب", "اسم الاب", "اسم الام", "الميلاد", "رقم الاب", "رقم الام", "الفرع", "الهوية", "action"]
  
 </script>
