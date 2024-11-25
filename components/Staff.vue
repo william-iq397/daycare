@@ -98,7 +98,7 @@
 
         <div class="flex flex-col justify-end col-span-1">
 
-            <div id="comp-m37ntzng" class="comp-m37ntzng wixui-vector-image">
+            <div id="comp-m37ntzng" class="animate-bounce comp-m37ntzng wixui-vector-image">
                 <div data-testid="svgRoot-comp-m37ntzng" class="AKxYR5 VZYmYf comp-m37ntzng"><svg
                         preserveAspectRatio="xMidYMid meet" data-bbox="31 45 138 109.999" viewBox="31 45 138 109.999"
                         height="100" width="100" xmlns="http://www.w3.org/2000/svg" data-type="color"

@@ -5,6 +5,7 @@
           <!-- الشعار والعنوان -->
           <NuxtLink to="/" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
             <img 
+            loading="lazy"
             src="https://i.ibb.co/ZVhm4vB/kids-drawing.png"
             alt="شعار الأطفال" 
               class="h-10 rounded-full"

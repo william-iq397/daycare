@@ -1,6 +1,6 @@
 <template>
     <header class="border border-solid border-black mt-10 w-full mb-20 text-[#213472]">
-        <nav class="border-gray-200 w-full">  <span v-if="user">{{ user.email }} {{ auth.user_name|| "hello" }} </span>
+        <nav class="border-gray-200 w-full">
             <div class="flex justify-around items-center mx-auto w-full">
                 <NuxtLink to="/" class="flex flex-col justify-center items-center w-44">
                      <Rainbow/>
@@ -53,11 +53,11 @@ const auth = useAuth();
 const route = useRoute();
 const user = useSupabaseUser()
 // ! TO DO 
-// check if the user tries to log in with non-exist email
 // role based access control
 // add update student
+// add branches page
 // after a certian time the status will change from طالب to خريج
-// add filter by status and date to reports
+// add filter by status and date to /reports
 
 // fetch user role 'admin' or 'user' 
 onMounted(() => {
@@ -79,7 +79,4 @@ const pages = [
     { name: 'تسجيل طالب', link: '/studentRegister' },
 ];
 
-watchEffect(auth?.role , () => {
-    auth.fetchUserRole()
-})
 </script>

@@ -24,13 +24,3 @@
       <img src="../images/autumn.jpg" alt="Sticker" />
     </div>-->
 </template>
-
-<script setup>
-import { useStudents } from '~/store/students';
-import studentRegisterForm from '../components/studentRegisterForm.vue';
-const useStudent = useStudents()
-</script>
-
-<style scoped>
-/* Optional: Add more custom styles here to further enhance the look */
-</style>

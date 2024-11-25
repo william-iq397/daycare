@@ -9,9 +9,9 @@
     </section>
 
     <section class="flex justify-evenly items-center">
-        <ImagesCloudOne/>
+        <ImagesCloudOne class="animate-wiggle"/>
         <Carousel />
-        <ImagesCloudTwo/>
+        <ImagesCloudTwo class="animate-wiggle" />
     </section>
 
 

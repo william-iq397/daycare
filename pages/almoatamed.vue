@@ -6,7 +6,7 @@
                 <h3 class="text-xl">مع المعتمد</h3>
                 <h1 class="text-3xl">طفلك في ايدي امينة</h1>
             </div>
-            <ImagesButterFly />
+            <ImagesButterFly class="animate-wiggle" />
         </div>
 
         <!-- <hr class="border border-solid border-[rgb(33,52,114)] my-16" /> -->

@@ -48,17 +48,6 @@ export const useAuth = defineStore("authStore", {
                 return
             }
 
-                    // Log the authData to verify the user.id
-            console.log("authData", authData); // Check if user.id exists
-
-            const userId = authData?.user?.id;
-            if (!userId) {
-                console.error("User ID is missing. Check if authData is correct.");
-                return;
-            }
-
-
-
             const toast = useToastr()
             setTimeout(() => {
                 toast.info('تم تسجيل حساب جديد بنجاح')                
@@ -90,34 +79,39 @@ export const useAuth = defineStore("authStore", {
         async login() {
             if (!this.validation()) return false
             const supabase = useSupabaseClient()
-            // const supa = supabase
 
             const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
                 email: this.email,
                 password: this.password,
               });
 
-
-           
-
-            // toast will pop up
-            const toast = useToastr()
-            toast.success("تم تسجيل الدخول بنجاح")
-            this.fetchUserRole()
-        },
-
-        //update Profile
-        async updateProfile(name) {
-            // const user = useSupabaseUser()
-            // const supabase = useSupabase()
-            const { data, error } = await supabase
+                // fetch logged in user information
+                const user = useSupabaseUser() 
+                const {data: userData} = await supabase
                 .from("users")
-                .update({ user_name: this.user_name })
-                .eq("id", user.value?.id)
-            console.log(data, error)
-            if (error) throw error
+                .select("*")
+                .eq("user_id", user?.value?.id)
+
+                // toast will pop up
+                const toast = useToastr()
+                toast.success("تم تسجيل الدخول بنجاح")
+                this.fetchUserRole()
+
+                // is the user who is logged in already in public/users then don't insert it
+                const userInserted = loginData?.user?.email == userData.email
+                if(userInserted) return;
+
+                // otherwise insert him
+                const {data} = await supabase
+                .from("users")
+                .insert([{
+                        user_id: loginData.user.id,
+                        email: loginData.user.email,
+                        role: "user"
+                        }])
         },
 
+        
         // LogOut
         async logout() {
             const supabase = useSupabaseClient()
@@ -130,10 +124,21 @@ export const useAuth = defineStore("authStore", {
                 console.log(error)
             }
 
-
-            
             this.role = ""
         },
+
+
+            //update Profile
+            // async updateProfile(name) {
+            //     // const user = useSupabaseUser()
+            //     // const supabase = useSupabase()
+            //     const { data, error } = await supabase
+            //         .from("users")
+            //         .update({ user_name: this.user_name })
+            //         .eq("id", user.value?.id)
+            //     console.log(data, error)
+            //     if (error) throw error
+            // },
     },
 })
 

@@ -1,6 +1,6 @@
 <template>
     <div id="comp-m37nnuba" class="comp-m37nnuba wixui-vector-image">
-        <div data-testid="svgRoot-comp-m37nnuba" class="AKxYR5 VZYmYf comp-m37nnuba"><svg
+        <div data-testid="svgRoot-comp-m37nnuba" ><svg
                 preserveAspectRatio="xMidYMid meet" data-bbox="46.999 62.001 106.001 75.999"
                 viewBox="46.999 62.001 106.001 75.999" height="200" width="200" xmlns="http://www.w3.org/2000/svg"
                 data-type="color" role="presentation" aria-hidden="true" aria-label="">
