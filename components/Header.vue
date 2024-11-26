@@ -13,25 +13,15 @@
 
                 <!-- menu for desktop -->
                 <div class="hidden w-full md:block md:w-auto">  
-                    <ul
-                        class="w-full xl:gap-2 font-thin flex flex-col md:flex-row items-center p-4 md:p-0 mt-4 border border-gray-100 rounded-3xl bg-[#FFCFAE] md:space-x-0 lg:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0"> 
-                        <li class="block py-2 px-3 bg-blue-700 rounded md:bg-transparent md:text-[#ff7500] md:p-0 text-xs md:text-xs lg:text-lg min-w-fit" v-for="page in pages" :key="page.name" aria-current="page">
+                    <ul class="w-full xl:gap-2 font-thin flex flex-col md:flex-row items-center p-4 md:p-0 mt-4 border border-gray-100 rounded-3xl bg-[#FFCFAE] md:space-x-0 md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0"> 
+                        <li class="block py-2 px-3 bg-blue-700 rounded md:bg-transparent md:text-[#ff7500] md:p-0 text-xs md:text-base lg:text-lg min-w-fit" v-for="page in pages" :key="page.name" aria-current="page">
                             <NuxtLink class="py-2 px-3 min-w-full" :class="{ 'text-black': route.path == page.link }" :to="page.link">{{ page.name }}</NuxtLink>
                         </li>
-                        <li v-if="auth.role == 'admin'">
-                            <dataDropDown />
+                        <li>
+                            <dataDropDown v-if="user"/>
                         </li>
-                        <!-- Conditional Login/Logout Button -->
-                        <li v-if="user">
-                            <button @click="auth.logout" class="min-w-full bg-blue-700 rounded md:bg-transparent md:text-[#ff7500] md:p-0 text-xs md:text-xs lg:text-sm">
-                                تسجيل الخروج
-                            </button>
-                        </li>
-                        <li v-else>
-                            <button @click="toggleLoginPopup" class="min-w-full bg-blue-700 rounded md:bg-transparent md:text-[#ff7500] md:p-0 text-xs md:text-xs lg:text-sm" :class="{ 'text-black': showLoginPopup, 'text-blue-500': !showLoginPopup }">
-                                تسجيل الدخول
-                            </button>
-                            <Login :isVisible="showLoginPopup" :closePopup="toggleLoginPopup" />
+                        <li class="text-[#ff7500] " v-if="user">
+                            <button @click="auth.logout">تسجيل الخروج</button>
                         </li>
                     </ul>
                 </div>
@@ -43,31 +33,19 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
-import Login from "~/pages/Login.vue";
-import { useAuth } from '../store/auth';
 import Rainbow from './Rainbow.vue';
-import { supabase } from '../supabase';
+import { useAuth } from '../store/auth';
 
-const showLoginPopup = ref(false)
-const auth = useAuth();
-const route = useRoute();
 const user = useSupabaseUser()
+const route = useRoute();
+const auth = useAuth()
 // ! TO DO 
-// role based access control
 // add update student
 // add branches page
-// after a certian time the status will change from طالب to خريج
-// add filter by status and date to /reports
+// add filter by status and year and branch to /reports /students
+// add font to the whole app
+// add : the status of the students will change based on the year that the daycare decide
 
-// fetch user role 'admin' or 'user' 
-onMounted(() => {
-    supabase.auth.onAuthStateChange(() => auth.fetchUserRole())
-});
-
-// Toggle login popup visibility
-function toggleLoginPopup() {
-    showLoginPopup.value = !showLoginPopup.value
-}
 
 // Pages for the navbar
 const pages = [

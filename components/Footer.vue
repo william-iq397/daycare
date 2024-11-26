@@ -18,10 +18,6 @@
             <li v-for="page in pages">
               <NuxtLink :to="page.link" class="hover:underline text-gray-300">{{ page.name }}</NuxtLink>
             </li>
-            <li class="pr-4 text-[#213472]">
-                <button @click="toggleLoginPopup" class="min-w-full rounded md:bg-transparent  md:p-0 text-xs md:text-xs lg:text-sm text-white">تسجيل الدخول</button>
-                <Login :isVisible="showLoginPopup" :closePopup="toggleLoginPopup" />
-            </li>
           </ul>
         </div>
   
@@ -62,7 +58,6 @@
   </template>
 
 <script setup>
-import Login from "~/pages/Login.vue";
 
 const currentYear = ref(new Date().getFullYear())
 
@@ -74,11 +69,6 @@ const pages = [
     { name: 'تسجيل الطالب', link: '/studentRegister' },
 ]
 
-const showLoginPopup = ref(false); // Manage visibility of the popup
-
-function toggleLoginPopup() {
-    showLoginPopup.value = !showLoginPopup.value; // Toggle popup visibility
-}
 </script>
   
   <style scoped>

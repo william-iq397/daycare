@@ -1,5 +1,6 @@
 <template>
   <dialog ref="dialog" class="rounded-lg shadow-lg p-6">
+    <OnClickOutside @trigger="closeDialog">
     <img :src="img" alt="Student ID" class="max-w-full h-full w-full rounded-lg mb-4" />
     <button
       @click="closeDialog"
@@ -7,12 +8,12 @@
     >
       أغلاق
     </button>
+  </OnClickOutside>
   </dialog>
-
- 
 </template>
 
 <script setup>
+import { OnClickOutside } from "@vueuse/components";
 import { onMounted, ref, watch } from "vue";
 
 const props = defineProps({
@@ -40,6 +41,7 @@ watch(
 function closeDialog() {
   dialog.value.close();
   emit("update:isOpen", false);
+  console.log(props.isOpen)
 }
 
 

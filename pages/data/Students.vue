@@ -19,15 +19,15 @@
        <tbody v-if="useStudent.$state.students">
          <tr v-for="student in useStudent.$state.students" :key="student.id" class="bg-white dark:bg-gray-800 transition-all duration-100 text-[12px] xl:text-[16px]">
           <td class="text-center"><input type="checkbox" v-model="selectedStudents" :value="student.id"/></td>
-           <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-left"> {{ student.student_name }}</th>
-           <td class="px-6 py-4">{{ student.father_name }}</td>
-           <td class="px-6 py-4">{{ student.mother_name }}</td>
-           <td class="px-6 py-4">{{ student.father_number }}</td>
-           <td class="px-6 py-4">{{ student.mother_number }}</td>
-           <td class="px-6 py-4">{{ student.student_birthdate }}</td>
-           <td class="px-6 py-4">{{ student.branch }}</td>
-           <td class="px-6 py-4">{{ student.study_status }}</td>
-           <td class="px-6 py-4 flex justify-center items-center">
+           <th scope="row" class="px-4 text-center py-4 font-medium whitespace-nowrap"> {{ student.student_name }}</th>
+           <td class="px-4 text-center py-4">{{ student.father_name }}</td>
+           <td class="px-4 text-center py-4">{{ student.mother_name }}</td>
+           <td class="px-4 text-center py-4">{{ student.father_number }}</td>
+           <td class="px-4 text-center py-4">{{ student.mother_number }}</td>
+           <td class="px-4 text-center py-4">{{ student.student_birthdate }}</td>
+           <td class="px-4 text-center py-4">{{ student.branch }}</td>
+           <td class="px-4 text-center py-4">{{ student.study_status }}</td>
+           <td class="px-4 text-center py-4 flex justify-center items-center">
            <img v-if="student.student_id_photo" :src="student.student_id_photo" class="h-12 w-12 border border-solid border-black rounded-lg cursor-pointer" @click="openImageModal(student.student_id_photo)" />
              <div v-else class="h-12 text-center flex justify-center items-center">
                لا يوجد صورة
@@ -74,7 +74,7 @@
    useStudent.fetchStudents();
  });
  
- const tableHead = ["اسم الطالب", "اسم الاب", "اسم الام", "الميلاد", "رقم الاب", "رقم الام", "الفرع", "الحالة", "الهوية", "action"]
+ const tableHead = ["", "اسم الطالب", "اسم الاب", "اسم الام","رقم الاب", "رقم الام","الميلاد", "الفرع", "الحالة", "الهوية", "action"]
 
 
 

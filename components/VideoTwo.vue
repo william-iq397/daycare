@@ -15,7 +15,7 @@
         </video>
 
         <button @click="playVideo" class="bg-blue-500 text-white py-2 px-4 rounded mt-4">
-          {{ isPlaying ? 'Pause Video' : 'Play Video' }}
+          {{ isPlaying ? 'ايقاف' : 'تشغيل' }}
         </button>
     </div>
 </template>
