@@ -1,5 +1,5 @@
 <template>
-    <header class="border border-solid border-black mt-10 w-full mb-20 text-[#213472]">
+    <header class="border border-solid border-black mt-10 w-full mb-20">
         <nav class="border-gray-200 w-full">
             <div class="flex justify-around items-center mx-auto w-full">
                 <NuxtLink to="/" class="flex flex-col justify-center items-center w-44">
@@ -13,8 +13,8 @@
 
                 <!-- menu for desktop -->
                 <div class="hidden w-full md:block md:w-auto">  
-                    <ul class="w-full xl:gap-2 font-thin flex flex-col md:flex-row items-center p-4 md:p-0 mt-4 border border-gray-100 rounded-3xl bg-[#FFCFAE] md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0"> 
-                        <li class="block py-2 px-3 bg-blue-700 rounded md:bg-transparent md:text-[#ff7500] md:p-0 text-xs md:text-base lg:text-lg min-w-fit" v-for="page in pages" :key="page.name" aria-current="page">
+                    <ul class="w-full xl:gap-2 font-thin flex flex-col md:flex-row items-center p-4 md:p-0 mt-4 border border-gray-100 rounded-3xl bg-[#FFCFAE]  md:space-x-0 rtl:space-x-reverse md:mt-0 md:border-0"> 
+                        <li class="block py-2 px-3 bg-blue-700 rounded md:bg-transparent md:text-[#ff7500] md:p-0 text-xs md:text-sm lg:text-lg min-w-fit" v-for="page in pages" :key="page.name" aria-current="page">
                             <NuxtLink class="py-2 px-3 min-w-full" :class="{ 'text-black': route.path == page.link }" :to="page.link">{{ page.name }}</NuxtLink>
                         </li>
                         <li>
@@ -39,13 +39,11 @@ import { useAuth } from '../store/auth';
 const user = useSupabaseUser()
 const route = useRoute();
 const auth = useAuth()
-// ! TO DO 
+// ! TO DO (ask gpt for all of 'em)
 // add update student
-// add branches page
-// add filter by status and year and branch to /reports /students
+// add filter by (study_status, year, branch) to /reports /students
 // add font to the whole app
-// add : the status of the students will change based on the year that the daycare decide
-
+// add : the status of the students will change based on the year/month that the daycare decide
 
 // Pages for the navbar
 const pages = [

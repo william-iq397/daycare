@@ -1,5 +1,5 @@
 <template>
-    <section class="flex flex-col justify-between">
+    <section class="flex flex-col justify-between overflow-hidden">
         <div class="flex flex-col sm:flex-row justify-between items-center text-[rgb(33,52,114)] font-bold ">
             <ImagesPlanet />
             <div class="flex flex-col items-center justify-between">
