@@ -39,11 +39,10 @@ import { useAuth } from '../store/auth';
 const user = useSupabaseUser()
 const route = useRoute();
 const auth = useAuth()
-// ! TO DO (ask gpt for all of 'em)
+// ! TO DO 
 // add update student
 // add filter by (study_status, year, branch) to /reports /students
 // add font to the whole app
-// add : the status of the students will change based on the year/month that the daycare decide
 
 // Pages for the navbar
 const pages = [

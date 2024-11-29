@@ -1,10 +1,9 @@
 <template>
    <div>
-    
-         <!-- Bulk Delete Button -->
+     <div class="mx-auto flex justify-center items-center gap-4">
       <!-- Master Checkbox -->
-    <div class="mx-auto flex justify-center items-center gap-4">
       <input type="checkbox" @change="toggleAllSelection($event)" :checked="areAllSelected" /> تحديد الكل
+      <!-- Bulk Delete Button -->
       <button  @click="deleteSelectedStudents" class="mt-4 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" :disabled="selectedStudents.length === 0">حذف المحددين</button>
     </div>
 
@@ -34,7 +33,7 @@
              </div>
            </td>
            <td class="text-center">
-             <button @click="updateStudent" class="hover:border-white transition-all duration-200 p-2 focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"> تعديل</button>
+            <button @click="openEditModal(student)" class="hover:border-white transition-all duration-200 p-2 focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" >تعديل</button>
            </td>
            <td class="text-center">
              <button @click="useStudent.deleteStudent(student.id, 'students')" class="w-[5em] hover:border-white transition-all duration-200 p-2 class=focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2"> حذف</button>
@@ -43,9 +42,10 @@
        </tbody>
      </table>
 
- 
+     <!-- Edit Modal -->
+     <EditModal :student="currentStudent" :isEditModalOpen="isEditModalOpen" @update:isEditModalOpen="isEditModalOpen = $event" :handleEditUpdate="handleEditUpdate" />
      <!-- Image Modal -->
-     <EditModal :img="openedImage" :isOpen="isOpen" @update:isOpen="isOpen = $event" />
+     <ImageModal :img="openedImage" :isImageModalOpen="isImageModalOpen" @update:isImageModalOpen="isImageModalOpen = $event" />
    </div>
  </template>
  
@@ -54,20 +54,29 @@
  import { useStudents } from "~/store/students";
  import EditModal from "~/components/EditModal.vue";
  
- const useStudent = useStudents();
- const isOpen = ref(false);
- const openedImage = ref("");
- const selectedStudents = ref([]);
+ const useStudent = useStudents()
+ const isImageModalOpen = ref(false)
+ const isEditModalOpen = ref(false)
+ const openedImage = ref("")
+ const selectedStudents = ref([])
+ const currentStudent = ref(null) // Tracks student for editing
 
  // Open the modal with the image
  function openImageModal(image) {
    openedImage.value = image;
-   isOpen.value = true;
+   isImageModalOpen.value = true;
  }
- 
- function updateStudent() {
-   console.log("Student is updated");
- }
+
+ // Open the edit modal
+function openEditModal(student) {
+  currentStudent.value = student // Clone the object to avoid direct mutation
+  isEditModalOpen.value = true;
+}
+
+// Handle the edit update
+async function handleEditUpdate(student) {
+  await useStudent.updateStudent(student.id, student);
+}
  
  // Fetch students when the page is loaded
  onMounted(() => {
@@ -76,12 +85,9 @@
  
  const tableHead = ["", "اسم الطالب", "اسم الاب", "اسم الام","رقم الاب", "رقم الام","الميلاد", "الفرع", "الحالة", "الهوية", "action"]
 
-
-
-
 // Delete selected students
 function deleteSelectedStudents() {
-  selectedStudents.value.forEach((studentId) => {
+    selectedStudents.value.forEach((studentId) => {
     useStudent.deleteStudent(studentId, "students");
   });
   // Clear the selected students after deletion
