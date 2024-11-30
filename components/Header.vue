@@ -44,6 +44,7 @@ const auth = useAuth()
 // add filter by (study_status, branch) to /reports /students
 // add pagination
 // add font to the whole app
+// fix student register (can't register new student)
 
 // Pages for the navbar
 const pages = [

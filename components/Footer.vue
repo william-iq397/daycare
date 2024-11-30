@@ -73,9 +73,6 @@ const pages = [
 </script>
   
   <style scoped>
-  footer {
-    font-family: 'Arial', sans-serif;
-  }
   a {
     transition: color 0.2s ease-in-out;
   }

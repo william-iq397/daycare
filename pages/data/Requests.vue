@@ -1,6 +1,6 @@
 <template>
     <div>
-       <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+       <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto border-collapse">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50  ">
              <tr>
                 <th scope="col" :colspan="head == 'action' ? 2 : 1" class="px-6 py-3 text-[14px] xl:text-[18px]" v-for="head in tableHead" :key="head">
@@ -57,6 +57,6 @@
     useStudent.fetchStudentsRequests();
  })
 
- const tableHead = ["اسم الطالب", "اسم الاب", "اسم الام", "الميلاد", "رقم الاب", "رقم الام", "الفرع", "الهوية", "action"]
+ const tableHead = ["اسم الطالب", "اسم الاب", "اسم الام","الفرع", "رقم الاب", "رقم الام", "الميلاد", "الهوية", "action"]
  
 </script>

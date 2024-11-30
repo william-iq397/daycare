@@ -127,4 +127,3 @@ const areAllSelected = computed(() => {
 });
 
  </script>
- 
