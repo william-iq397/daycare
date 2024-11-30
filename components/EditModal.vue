@@ -4,7 +4,7 @@
             <div class="bg-white rounded-lg shadow-lg p-6 min-w-[700px]">
                 <h2 class="text-xl font-semibold mb-4">تعديل بيانات الطالب</h2>
 
-                <form @submit.prevent="handleEditUpdate">
+                <form @submit.prevent="submitUpdate()">
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block mb-2 text-sm font-medium text-gray-900">اسم الطالب</label>
@@ -23,7 +23,7 @@
 
                         <div>
                             <label class="block mb-2 text-sm font-medium text-gray-900">تاريخ الميلاد</label>
-                            <input type="date" v-model="student.student_birthdate" class="block w-full p-2 border rounded-lg text-sm" />
+                            <input type="text" v-model="student.student_birthdate" class="block w-full p-2 border rounded-lg text-sm" />
                         </div>
 
                         <div>
@@ -42,13 +42,16 @@
                         </div>
 
                         <div>
-                            <label class="block mb-2 text-sm font-medium text-gray-900"> الفرع</label>
-                            <input type="text" v-model="student.branch" class="block w-full p-2 border rounded-lg text-sm" />
+                            <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="student.branch">
+                                <option value="الجبيلة" class="text-black" selected>الجبيلة</option>
+                                <option value="المناوي" class="text-black">المناوي</option>
+                                <option value="البراضعية" class="text-black">البراضعية</option>
+                            </select>
                         </div>
 
                         <div>
                             <label class="block mb-2 text-sm font-medium text-gray-900">صورة الهوية</label>
-                            <input type="text" v-model="student.student_id_photo" class="block w-full p-2 border rounded-lg text-sm" placeholder="رابط الصورة" />
+                            <input type="file" @change="onFileChange" class="block w-full p-2 border rounded-lg text-sm" />
                         </div>
                     </div>
 
@@ -65,13 +68,13 @@
 <script setup>
 import { OnClickOutside } from '@vueuse/components';
 import { useStudents } from '../store/students';
+// import UploadImageInput from 
 
 const useStudent = useStudents()
 
 const props = defineProps({
     student: Object,
     isEditModalOpen: Boolean,
-    handleEditUpdate: Function,
 });
 
 
@@ -82,7 +85,23 @@ function closeModal() {
 }
 
 async function submitUpdate() {
-    useStudent.updateStudent(props?.student?.id)
+    useStudent.updateStudent(props?.student?.id, props.student)
     closeModal();
 }
+
+
+const onFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+
+        // Convert the file to a data URL
+        reader.onload = (e) => {
+            props.student.student_id_photo = e.target.result; // Save data URL in the state
+        };
+
+        reader.readAsDataURL(file);
+    }
+}
+
 </script>

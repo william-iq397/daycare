@@ -71,29 +71,26 @@ export const useStudents = defineStore("useStudents", {
                 this.fetchStudents()
         },
 
-        async updateStudent(id) {
+        async updateStudent(id, student) {
             const supabase = useSupabaseClient();
-        
-           
         
             const { data, error } = await supabase
                 .from('students')
                 .update({
-                    id: Math.floor(Math.random() * 1000000000),
-                    student_name: this.student.student_name,
-                    father_name: this.student.father_name,
-                    mother_name: this.student.mother_name,
-                    student_id_photo: this.student.student_id_photo,
-                    student_birthdate: this.student.student_birthdate,
+                    id: id,
+                    student_name: student.student_name,
+                    father_name: student.father_name,
+                    mother_name: student.mother_name,
+                    branch: student.branch,
+                    study_status: student.study_status,
+                    father_number: student.father_number,
+                    mother_number: student.mother_number,
+                    student_birthdate: student.student_birthdate,
+                    student_id_photo: student.student_id_photo,
                 })
-                .eq('id', id).select("*")
-                
-        
-            if (error) {
-                console.error("Error updating student:", error.message);
-                return;
-            }
-        
+                .eq('id', id)
+                .select()
+
             console.log("Student updated successfully:", data);
         
             this.fetchStudents();

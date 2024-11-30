@@ -1,6 +1,6 @@
 <template>
-    <svg preserveAspectRatio="xMidYMid meet" data-bbox="26.5 36 147 128" viewBox="26.5 36 147 128" height="200"
-        width="200" xmlns="http://www.w3.org/2000/svg" data-type="color" role="presentation" aria-hidden="true"
+    <svg preserveAspectRatio="xMidYMid meet" data-bbox="26.5 36 147 128" viewBox="26.5 36 147 128" height="180"
+        width="180" xmlns="http://www.w3.org/2000/svg" data-type="color" role="presentation" aria-hidden="true"
         aria-label="">
         <g>
             <path

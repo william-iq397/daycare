@@ -1,7 +1,8 @@
 <template>
    <div>
-     <div class="mx-auto flex justify-center items-center gap-4">
+     <div class="mx-auto flex justify-center items-center gap-4 my-4">
       <!-- Master Checkbox -->
+      <FilterByRegisterYear v-if="useStudent?.$state?.students" :years="studentsYearRegister" @yearSelected="filterStudentsByYear"/>
       <input type="checkbox" @change="toggleAllSelection($event)" :checked="areAllSelected" /> تحديد الكل
       <!-- Bulk Delete Button -->
       <button  @click="deleteSelectedStudents" class="mt-4 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" :disabled="selectedStudents.length === 0">حذف المحددين</button>
@@ -15,10 +16,10 @@
            </th>
          </tr>
        </thead>
-       <tbody v-if="useStudent.$state.students">
-         <tr v-for="student in useStudent.$state.students" :key="student.id" class="bg-white dark:bg-gray-800 transition-all duration-100 text-[12px] xl:text-[16px]">
+       <tbody v-if="useStudent?.$state?.students">
+         <tr v-for="student in filteredStudents" :key="student.id" class="bg-white dark:bg-gray-800 transition-all duration-100 text-[12px] xl:text-[16px]">
           <td class="text-center"><input type="checkbox" v-model="selectedStudents" :value="student.id"/></td>
-           <th scope="row" class="px-4 text-center py-4 font-medium whitespace-nowrap"> {{ student.student_name }}</th>
+           <th scope="row" class="px-4 text-center py-4 font-medium whitespace-nowrap"> {{ student.student_name }} </th>
            <td class="px-4 text-center py-4">{{ student.father_name }}</td>
            <td class="px-4 text-center py-4">{{ student.mother_name }}</td>
            <td class="px-4 text-center py-4">{{ student.father_number }}</td>
@@ -33,17 +34,17 @@
              </div>
            </td>
            <td class="text-center">
-            <button @click="openEditModal(student)" class="hover:border-white transition-all duration-200 p-2 focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" >تعديل</button>
+            <button @click="() => openEditModal(student)" class="hover:border-white transition-all duration-200 p-2 focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" >تعديل</button>
            </td>
            <td class="text-center">
-             <button @click="useStudent.deleteStudent(student.id, 'students')" class="w-[5em] hover:border-white transition-all duration-200 p-2 class=focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2"> حذف</button>
+             <button @click="() => useStudent.deleteStudent(student.id, 'students')" class="w-[5em] hover:border-white transition-all duration-200 p-2 class=focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2"> حذف</button>
            </td>
          </tr>
        </tbody>
      </table>
 
      <!-- Edit Modal -->
-     <EditModal :student="currentStudent" :isEditModalOpen="isEditModalOpen" @update:isEditModalOpen="isEditModalOpen = $event" :handleEditUpdate="handleEditUpdate" />
+     <EditModal :student="currentStudent" :isEditModalOpen="isEditModalOpen" @update:isEditModalOpen="isEditModalOpen = $event" />
      <!-- Image Modal -->
      <ImageModal :img="openedImage" :isImageModalOpen="isImageModalOpen" @update:isImageModalOpen="isImageModalOpen = $event" />
    </div>
@@ -53,6 +54,11 @@
  import { ref, onMounted } from "vue";
  import { useStudents } from "~/store/students";
  import EditModal from "~/components/EditModal.vue";
+
+  // Fetch students when the page is loaded
+  onMounted(() => {
+   useStudent.fetchStudents();
+ });
  
  const useStudent = useStudents()
  const isImageModalOpen = ref(false)
@@ -72,19 +78,27 @@ function openEditModal(student) {
   currentStudent.value = student // Clone the object to avoid direct mutation
   isEditModalOpen.value = true;
 }
-
-// Handle the edit update
-async function handleEditUpdate(student) {
-  await useStudent.updateStudent(student.id, student);
-}
- 
- // Fetch students when the page is loaded
- onMounted(() => {
-   useStudent.fetchStudents();
- });
  
  const tableHead = ["", "اسم الطالب", "اسم الاب", "اسم الام","رقم الاب", "رقم الام","الميلاد", "الفرع", "الحالة", "الهوية", "action"]
 
+
+const filteredStudents = ref(useStudent?.$state?.students);
+// Filter the students by the selected year
+const studentsYearRegister = ref([...new Set(useStudent?.students?.map(student => student?.created_at.slice(0, 10).split("-")[0]))])
+
+function filterStudentsByYear(selectedYear) {
+  if (selectedYear == "الكل") {
+    filteredStudents.value = useStudent.$state.students;
+  } else {
+    filteredStudents.value = useStudent.$state.students.filter((student) => {
+      const year = student.created_at.slice(0, 10).split("-")[0];
+      return year === selectedYear;
+    });
+  }
+}
+
+
+// bulk delete prerequisits 
 // Delete selected students
 function deleteSelectedStudents() {
     selectedStudents.value.forEach((studentId) => {
@@ -98,6 +112,7 @@ function deleteSelectedStudents() {
 function toggleAllSelection(event) {
   if (event.target.checked) {
     selectedStudents.value = useStudent.$state.students.map((student) => student.id);
+    console.log(selectedStudents)
   } else {
     selectedStudents.value = [];
   }
