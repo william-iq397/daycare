@@ -3,17 +3,16 @@ export const useStudents = defineStore("useStudents", {
     state: () => ({
         studentsRequests: [],
         students: [],
-        student: {
-            student_name: "",
-            father_name: "",
-            mother_name: "",
-            father_number: "",
-            mother_number: "",
-            study_status: "",
-            branch: "فرع الجبيلة",
-            student_id_photo: "",
-            student_birthdate: "",
-        },
+           student: {
+                student_name: '',
+                father_name: '',
+                mother_name: '',
+                father_number: '',
+                mother_number: '',
+                branch: 'الجبيلة',
+                student_birthdate: '',
+                student_id_photo: '',
+                },
         filter: "",
     }),
     getters: {
@@ -43,23 +42,22 @@ export const useStudents = defineStore("useStudents", {
             const supabase = useSupabaseClient()
             const { data, error } = await supabase
                 .from("students_request")
-                .insert([{
-                    student_name: this.student.student_name,
+                .insert({
+                    student_name: this.$state.student.student_name,
                     father_name: this.student.father_name,
                     mother_name: this.student.mother_name,
                     father_number: this.student.father_number,
                     mother_number: this.student.mother_number,
-                    branch: this.student.branch,
                     student_birthdate: this.student.student_birthdate,
+                    branch: this.student.branch,
                     student_id_photo: this.student.student_id_photo, 
-                }])
-                .select()
+                })
 
             this.fetchStudentsRequests()
 
             console.log(data)
             if (error) {
-                console.log("error" + error)
+                console.log("error" + error.message)
                 return;
             }
             

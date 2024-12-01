@@ -4,7 +4,7 @@
           <thead class="text-xs text-gray-700 uppercase bg-gray-50  ">
              <tr>
                 <th scope="col" :colspan="head == 'action' ? 2 : 1" class="px-6 py-3 text-[14px] xl:text-[18px]" v-for="head in tableHead" :key="head">
-                  <div :class=" head == 'action' || head ==  'ID' ?  'text-center' : 'text-left'"> {{ head }} </div>
+                  <div :class=" head == 'action' || head ==  'ID' || head == 'الهوية' || head == 'الميلاد' ?  'text-center' : 'text-left'"> {{ head }} </div>
                 </th>
              </tr>
           </thead>
@@ -57,6 +57,6 @@
     useStudent.fetchStudentsRequests();
  })
 
- const tableHead = ["اسم الطالب", "اسم الاب", "اسم الام","الفرع", "رقم الاب", "رقم الام", "الميلاد", "الهوية", "action"]
+ const tableHead = ["اسم الطالب", "اسم الاب", "اسم الام","رقم الام", "رقم الاب", "الفرع", "الميلاد", "الهوية", "action"]
  
 </script>
