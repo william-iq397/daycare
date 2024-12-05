@@ -39,6 +39,7 @@
 </template>
 
 <script setup>
+import UploadImageInput from './UploadImageInput.vue';
 import { useStudents } from '~/store/students';
 const useStudent = useStudents()
 </script>

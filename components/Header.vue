@@ -20,7 +20,7 @@
                         <li>
                             <dataDropDown v-if="user"/>
                         </li>
-                        <li class="text-[#ff7500] " v-if="user">
+                        <li class="text-[#ff7500] pr-2" v-if="user">
                             <button @click="auth.logout">تسجيل الخروج</button>
                         </li>
                     </ul>
@@ -43,14 +43,15 @@ const auth = useAuth()
 // add after certian year/month the daycare decide the study_status will change 
 // add filter by (study_status, branch) to /reports /students
 // add pagination
-// add font to the whole app
+
 
 // Pages for the navbar
 const pages = [
     { name: 'الصفحة الرئيسية', link: '/' },
     { name: 'المعتمد', link: '/almoatamed' },
     { name: 'فروعنا', link: '/branches' },
-    { name: 'مناهج', link: '/methodaligies' },
+    { name: 'المعلمين', link: '/teachers' },
+    { name: 'مناهج', link: '/curriculums' },
     { name: 'ملاحضات', link: '/notes' },
     { name: 'تسجيل طالب', link: '/studentRegister' },
 ];

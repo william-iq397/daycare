@@ -1,6 +1,6 @@
 <template>
-    <div class=" dark:bg-slate-700 bg-opacity-50 flex justify-center items-center">
-      <div class="bg-white p-8 rounded shadow-lg flex flex-col h-[27rem]" >
+    <div class=" bg-opacity-50 flex justify-center items-center">
+      <div class="bg-slate-700 p-8 rounded shadow-lg flex flex-col h-[27rem]" >
         <!-- Tab Buttons -->
   
         <!-- Conditional Rendering of Forms -->

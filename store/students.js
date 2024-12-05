@@ -13,6 +13,20 @@ export const useStudents = defineStore("useStudents", {
                 student_birthdate: '',
                 student_id_photo: '',
                 },
+        teachers: [],
+        teacher: {
+            teacher_name: '',
+            teacher_description: '',
+            teacher_image: '',
+        },
+        curriculums: [],
+        curriculum: {
+            curriculum_name: '',
+            curriculum_file: '',
+            curriculum_image: '',
+        },
+
+
         filter: "",
     }),
     getters: {
@@ -130,7 +144,117 @@ export const useStudents = defineStore("useStudents", {
             // Refresh the lists
             this.fetchStudentsRequests();
             this.fetchStudents();
-        }
+        },
+
+        async fetchTeachers() {
+            const supabase = useSupabaseClient();
+            const { data, error } = await supabase
+            .from('teachers')
+            .select()
+            .order('created_at', { ascending: true })
+
+            this.teachers = data
+        },
+
+        async addTeacher() {
+            const supabase = useSupabaseClient();
+            const { data, error } = await supabase
+            .from('teachers')
+            .insert({
+                teacher_name: this.teacher.teacher_name,
+                teacher_description: this.teacher.teacher_description,
+                teacher_image: this.teacher.teacher_image,
+            })
+
+            if(error) console.log("error" + error)
+
+            this.fetchTeachers()
+
+            this.teacher.teacher_name = ""
+            this.teacher.teacher_description = ""
+            this.teacher.teacher_image = ""
+        },
+
+        async deleteTeacher(id) {
+            const supabase = useSupabaseClient();
+            const { data, error } = await supabase
+            .from('teachers')
+            .delete()
+            .eq('id', id)
+
+
+            this.fetchTeachers()
+
+        },
+
+        async updateTeacher(id, teacher) {
+            const supabase = useSupabaseClient();
+            const { data, error } = await supabase
+                .from('teachers')
+                .update({
+                    id: id,
+                    teacher_name: teacher.teacher_name,
+                    teacher_description: teacher.teacher_description,
+                    teacher_image: teacher.teacher_image,
+              
+                })
+                .eq('id', id)
+                .select()
+
+            console.log("Student updated successfully:", data);
         
+            this.fetchTeachers();
+        },
+
+        async addCurriculum() {
+            const supabase = useSupabaseClient();
+            const { data, error } = await supabase
+            .from('curriculums')
+            .insert({
+                curriculum_name: this.curriculum.curriculum_name,
+                curriculum_file: this.curriculum.curriculum_file,
+                curriculum_image: this.curriculum.curriculum_image,
+            })
+
+            this.fetchCurriculums()
+                    
+            this.curriculum.curriculum_name = ""
+            this.curriculum.curriculum_file = ""
+            this.curriculum.curriculum_image = ""
+        }, 
+
+        async fetchCurriculums() {
+            const supabase = useSupabaseClient();
+            const { data, error } = await supabase
+            .from('curriculums')
+            .select()
+            .order('created_at', { ascending: true })
+
+            this.curriculums = data
+        },
+
+        async deleteCurriculum(id) {
+            const supabase = useSupabaseClient();
+            const { data, error } = await supabase
+            .from('curriculums')
+            .delete()
+            .eq('id', id)
+
+            this.fetchCurriculums()
+        },
+
+        async updateCurriculum(id, curriculum) {
+            const supabase = useSupabaseClient();
+            const { data, error } = await supabase
+            .from('curriculums')
+            .update({
+                curriculum_name: curriculum.curriculum_name,
+                curriculum_file: curriculum.curriculum_file,
+                curriculum_image: curriculum.curriculum_image,
+            })
+            .eq('id', id)
+
+            this.fetchCurriculums()
+        } 
     },
 })

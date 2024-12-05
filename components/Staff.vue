@@ -1,7 +1,7 @@
 <template>
-    <section  class="flex flex-col md:flex-row justify-between gap-20 mt-40">
+    <section  class="flex flex-col md:flex-row justify-between gap-20 mt-20">
 
-        <div class="flex flex-row md:flex-col justify-around">
+        <div class="flex flex-row md:flex-col justify-around my-24 md:my-0">
             <ImagesVectors />
         </div>
 

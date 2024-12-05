@@ -86,7 +86,7 @@
     useStudent.students.filter((student) =>
       JSON.stringify(student).toLowerCase().includes(useStudent.filter.toLowerCase())
     )
-  );
+  )
 
 </script>
 

@@ -15,10 +15,10 @@
 
         <hr class="border border-solid border-[rgb(33,52,114)] my-16" />
         
-        <div class="flex flex-col justify-between gap-20">
+        <div class="flex flex-col justify-between gap-20 md:gap-0">
             <Goals />
 
-            <hr class="border border-solid border-transparent md:border-[rgb(33,52,114)]  my-16  md:block" />
+            <hr class="border border-solid border-transparent md:border-[rgb(33,52,114)]  my-16 md:my-0  md:block" />
 
             <Staff />
         </div>

@@ -65,7 +65,7 @@ const pages = [
     { name: 'الصفحة الرئيسية', link: '/' },
     { name: 'المعتمد', link: '/almoatamed' },
     { name: 'الفروع', link: '/branches' },
-    { name: 'المناهج', link: '/methodaligies' },
+    { name: 'المناهج', link: 'curriculums' },
     { name: 'ملاحضات', link: '/notes' },
     { name: 'تسجيل الطالب', link: '/studentRegister' },
 ]
