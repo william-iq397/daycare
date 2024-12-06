@@ -146,6 +146,7 @@ export const useStudents = defineStore("useStudents", {
             this.fetchStudents();
         },
 
+        // teachers functions
         async fetchTeachers() {
             const supabase = useSupabaseClient();
             const { data, error } = await supabase
@@ -206,55 +207,59 @@ export const useStudents = defineStore("useStudents", {
             this.fetchTeachers();
         },
 
-        async addCurriculum() {
-            const supabase = useSupabaseClient();
-            const { data, error } = await supabase
-            .from('curriculums')
-            .insert({
-                curriculum_name: this.curriculum.curriculum_name,
-                curriculum_file: this.curriculum.curriculum_file,
-                curriculum_image: this.curriculum.curriculum_image,
-            })
+        // Curriculums functions
+        // async fetchCurriculums() {
+        //    const supabase = useSupabaseClient()
+        //    const { data, error } = await supabase
+        //    .from('curriculums')
+        //    .select()
+        //    .order('created_at', {ascending: true})
 
-            this.fetchCurriculums()
+        //    this.curriculums = data
+        //    console.log("data : " +  data)
+        // },
+
+        // async addCurriculum() {
+        //     const supabase = useSupabaseClient();
+        //     const { data, error } = await supabase
+        //     .from('curriculums')
+        //     .insert({
+        //         curriculum_name: this.curriculum.curriculum_name,
+        //         curriculum_file: this.curriculum.curriculum_file,
+        //         curriculum_image: this.curriculum.curriculum_image,
+        //     })
+
+        //     this.fetchCurriculums()
                     
-            this.curriculum.curriculum_name = ""
-            this.curriculum.curriculum_file = ""
-            this.curriculum.curriculum_image = ""
-        }, 
+        //     this.curriculum.curriculum_name = ""
+        //     this.curriculum.curriculum_file = ""
+        //     this.curriculum.curriculum_image = ""
+        // }, 
 
-        async fetchCurriculums() {
-            const supabase = useSupabaseClient();
-            const { data, error } = await supabase
-            .from('curriculums')
-            .select()
-            .order('created_at', { ascending: true })
 
-            this.curriculums = data
-        },
+        // async deleteCurriculum(id) {
+        //     const supabase = useSupabaseClient();
+        //     const { data, error } = await supabase
+        //     .from('curriculums')
+        //     .delete()
+        //     .eq('id', id)
 
-        async deleteCurriculum(id) {
-            const supabase = useSupabaseClient();
-            const { data, error } = await supabase
-            .from('curriculums')
-            .delete()
-            .eq('id', id)
+        //     this.fetchCurriculums()
+        // },
 
-            this.fetchCurriculums()
-        },
+        // async updateCurriculum(id, curriculum) {
+        //     const supabase = useSupabaseClient();
+        //     const { data, error } = await supabase
+        //     .from('curriculums')
+        //     .update({
+        //         id: id,
+        //         curriculum_name: curriculum.curriculum_name,
+        //         curriculum_file: curriculum.curriculum_file,
+        //         curriculum_image: curriculum.curriculum_image,
+        //     })
+        //     .eq('id', id)
 
-        async updateCurriculum(id, curriculum) {
-            const supabase = useSupabaseClient();
-            const { data, error } = await supabase
-            .from('curriculums')
-            .update({
-                curriculum_name: curriculum.curriculum_name,
-                curriculum_file: curriculum.curriculum_file,
-                curriculum_image: curriculum.curriculum_image,
-            })
-            .eq('id', id)
-
-            this.fetchCurriculums()
-        } 
+        //     this.fetchCurriculums()
+        // } 
     },
 })

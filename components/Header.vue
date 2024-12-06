@@ -1,5 +1,5 @@
 <template>
-    <header class="border border-solid border-black mt-10 w-full mb-20">
+    <header class="border border-solid border-black border-t-transparent rounded mt-10 w-full mb-20">
         <nav class="border-gray-200 w-full">
             <div class="flex justify-around items-center mx-auto w-full">
                 <NuxtLink to="/" class="flex flex-col justify-center items-center w-44">
