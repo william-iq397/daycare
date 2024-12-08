@@ -2,6 +2,6 @@ import { createClient } from '@supabase/supabase-js'
 
 // Create a single supabase client for interacting with your database
 const SUPABASE_URL = 'https://oboobszlhgsleplsgoty.supabase.co'
-const SUPABASE_KEY = process.env.SUPABASE_KEY
+const SUPABASE_KEY = process.env.NUXT_PUBLIC_SUPABASE_ANON_KEY
 
-export const supabase = createClient('https://oboobszlhgsleplsgoty.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ib29ic3psaGdzbGVwbHNnb3R5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzA1NDU4MzUsImV4cCI6MjA0NjEyMTgzNX0.91gHMCv5AwFpcP-1vGZOR6Cj4Mris8ivi8SWtuLFFYw')
+export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
