@@ -12,5 +12,7 @@ export default defineNuxtConfig({
       exclude: [],          // Paths that skip redirection logic
       cookieRedirect: false // Disable cookie-based redirection
     },
+    url: process.env.NUXT_PUBLIC_SUPABASE_URL,
+    key: process.env.NUXT_PUBLIC_SUPABASE_ANON_KEY,
   },
 });
