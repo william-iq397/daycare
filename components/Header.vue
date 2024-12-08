@@ -40,8 +40,6 @@ const user = useSupabaseUser()
 const route = useRoute();
 const auth = useAuth()
 // ! TO DO 
-// add after certian year/month the daycare decide the study_status will change 
-// add filter by (study_status, branch) to /reports /students
 // add pagination
 
 

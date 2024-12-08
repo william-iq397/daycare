@@ -7,6 +7,10 @@
                     <img :src="curriculum.image" :alt="curriculum.name" class="w-24 h-24 rounded-full mb-4" />
                     <h2 class="text-lg font-bold text-gray-800">{{ curriculum.name }}</h2>
                     <a :href="curriculum.file" download class="mt-2 inline-block bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">تحميل</a>
+                    <div class="flex justify-between w-1/2 text-white mt-4" v-if="user">
+                        <button class="p-2 px-4 bg-red-700 rounded" @click="useStudent.deleteCurriculum(curriculum.id)">حذف</button>
+                        <button class="p-2 px-4 bg-green-800 rounded" @click="openEditModal(curriculum)">تعديل</button>
+                    </div>
                 </div>
                 <!-- <div v-for="curriculum in useStudent.curriculums" :key="curriculum.id" class="flex flex-col items-center text-black rounded-lg shadow-md p-4">
                     <img loading="lazy" :src="curriculum.curriculum_image" :alt="curriculum.curriculum_name" class="w-24 h-24 rounded-full mb-4" />
@@ -33,6 +37,7 @@ import math from '../images/math.jfif'
 import manners from '../images/manners.jfif'
 import english from '../images/english.jfif'
 
+const user = useSupabaseUser()
 // const useStudent = useStudents()
 // const isEditModalOpen = ref(false)
 // const currentCurriculum = ref(null)

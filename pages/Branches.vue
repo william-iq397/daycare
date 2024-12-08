@@ -4,7 +4,7 @@
         <div class="flex flex-wrap justify-evenly items-center w-11/12 mx-auto">
             <ImagesGirlRabit />
             <div class="flex flex-col justify-center items-center w-full md:w-auto">
-                <h1 class="text-2xl text-[#213472] text-center">أفرع روضة المعتمد</h1>
+                <h1 class="text-2xl text-[#213472] text-center">فرع مناوي باشا</h1>
                 <ImagesLine />
             </div>
             <ImagesRabitHead />
@@ -34,8 +34,9 @@
                 <!-- Location -->
                 <div class="mt-6 text-center">
                     <iframe
+                        class="mx-auto"
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12850.926269181048!2d47.835671!3d30.508409!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fc497cfaaaaaaab%3A0x3e13ee4c9d8b35e5!2z2YHZiNmH2LHZiti52Kkg2YbZitio2Kkg2KfZhNiq2YXYqiDZhdiz2YrYqQ!5e0!3m2!1sen!2siq!4v0000000000000"
-                        width="100%" height="300" style="border:0;"  loading="lazy">
+                        width="80%" height="300" style="border:0;"  loading="lazy">
                     </iframe>
                 </div>
                 <div class="text-center mt-6">
@@ -54,7 +55,7 @@
         <div class="flex flex-wrap justify-evenly items-center w-11/12 mx-auto">
             <ImagesGirlRabitTwo />
             <div class="flex flex-col justify-center items-center w-full md:w-auto">
-                <h1 class="text-2xl text-[#213472] text-center">أفرع روضة المعتمد</h1>
+                <h1 class="text-2xl text-[#213472] text-center">فرع الطويسة</h1>
                 <ImagesLine />
             </div>
             <ImagesGirlRabitThree />
@@ -84,8 +85,9 @@
                 <!-- Location with Directions -->
                 <div class="mt-6 text-center">
                     <iframe
+                        class="mx-auto"
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12850.926269181048!2d47.835671!3d30.512860!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fc497cfaaaaaaab%3A0x3e13ee4c9d8b35e5!2z2YHZiNmH2LHZiti52Kkg2KfZhNiq2YXYqiDZhdiz2YrYqQ!5e0!3m2!1sen!2siq!4v0000000000000"
-                        width="100%" height="300" style="border:0;"  loading="lazy">
+                        width="80%" height="300" style="border:0;"  loading="lazy">
                     </iframe>
                 </div>
                 <div class="mt-6 text-center">
@@ -104,7 +106,7 @@
         <div class="flex flex-wrap justify-evenly items-center w-11/12 mx-auto">
             <ImagesButterFly />
             <div class="flex flex-col justify-center items-center w-full md:w-auto">
-                <h1 class="text-2xl text-[#213472] text-center">أفرع روضة المعتمد</h1>
+                <h1 class="text-2xl text-[#213472] text-center">فرع الجبيلة</h1>
                 <ImagesLine />
             </div>
             <ImagesRabitHead />
@@ -133,8 +135,9 @@
                 <!-- Location -->
                 <div class="mt-6 text-center">
                     <iframe
+                        class="mx-auto"
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12850.926269181048!2d47.835671!3d30.533307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fc497cfaaaaaaab%3A0x3e13ee4c9d8b35e5!2z2YHZiNmH2LHZiti52Kkg2YbZitio2Kkg2KfZhNiq2YXYqiDZhdiz2YrYqQ!5e0!3m2!1sen!2siq!4v0000000000000"
-                        width="100%" height="300" style="border:0;"  loading="lazy">
+                        width="80%" height="300" style="border:0;"  loading="lazy">
                     </iframe>
                 </div>
                 <div class="text-center mt-6">
