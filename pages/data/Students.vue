@@ -17,7 +17,7 @@
          </tr>
        </thead>
        <tbody v-if="useStudent?.$state?.students">
-         <tr v-for="student in filteredStudents" :key="student.id" class="bg-white dark:bg-gray-800 transition-all duration-100 text-[12px] xl:text-[16px]">
+         <tr v-for="student in filteredStudents" :key="student.id" class="dark:bg-gray-800 transition-all duration-100 text-[12px] xl:text-[16px]">
           <td class="text-center"><input type="checkbox" v-model="selectedStudents" :value="student.id"/></td>
            <th scope="row" class="px-4 text-center py-4 font-medium whitespace-nowrap"> {{ student.student_name }} </th>
            <td class="px-4 text-center py-4">{{ student.father_name }}</td>

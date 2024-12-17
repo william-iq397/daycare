@@ -8,7 +8,7 @@
         </div>
     </section>
 
-    <section class="flex items-center overflow-hidden">
+    <section class="flex items-center overflow-hidden" id="controls-carousel">
         <ImagesCloudOne class="animate-wiggle"/>
         <Carousel />
         <ImagesCloudTwo class="animate-wiggle" />

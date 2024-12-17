@@ -18,7 +18,7 @@
                             <NuxtLink class="py-2 px-3 min-w-full" :class="{ 'text-black': route.path == page.link }" :to="page.link">{{ page.name }}</NuxtLink>
                         </li>
                         <li>
-                            <dataDropDown v-if="user"/>
+                            <dataDropDown v-if="user" />
                         </li>
                         <li class="text-[#ff7500] pr-2" v-if="user">
                             <button @click="auth.logout">تسجيل الخروج</button>

@@ -1,7 +1,7 @@
 <template>
     <div>
        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto border-collapse">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-50  ">
+          <thead class="text-xs text-gray-400 uppercase bg-gray-700  ">
              <tr>
                 <th scope="col" :colspan="head == 'action' ? 2 : 1" class="px-6 py-3 text-[14px] xl:text-[18px]" v-for="head in tableHead" :key="head">
                   <div :class=" head == 'action' || head ==  'ID' || head == 'الهوية' || head == 'الميلاد' ?  'text-center' : 'text-left'"> {{ head }} </div>
@@ -9,7 +9,7 @@
              </tr>
           </thead>
           <tbody v-if="useStudent.$state.studentsRequests">
-             <tr  v-for="student in useStudent.$state.studentsRequests" :key="student.id" class="bg-white transition-all duration-100 text-[12px] xl:text-[16px] 2xl:text-[20px]">
+             <tr  v-for="student in useStudent.$state.studentsRequests" :key="student.id" class="bg-gray-800 transition-all duration-100 text-[12px] xl:text-[16px] 2xl:text-[20px]">
                 <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap text-left">
                    {{ student.student_name }}
                 </th>

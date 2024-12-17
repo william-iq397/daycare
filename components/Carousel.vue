@@ -1,6 +1,6 @@
 <template>
     
-    <div id="controls-carousel" class="relative w-[80%] md:w-96 mx-auto my-8" data-carousel="static">
+    <div class="relative w-[80%] md:w-96 mx-auto my-8" data-carousel="static">
             <!-- Carousel Wrapper -->
             <div class="relative overflow-hidden rounded-lg h-96 ">
                 <!-- Carousel Items -->

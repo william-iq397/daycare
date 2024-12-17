@@ -26,7 +26,9 @@
                الدولي، مع توفير بيئة آمنة تشجعهم على استكشاف قدراتهم وتحقيق إمكاناتهم الكاملة على يد فريق متخصص من
                المعلمين
             </p>
-            <button class="transition-all duration-300 hover:bg-orange-500 text-white hover:border hover:border-solid hover:border-black hover:text-white  bg-orange-700 rounded-3xl  font-black flex justify-center items-center w-28 h-10 p-4 text-xl">شهادتنا</button>
+            <button class="transition-all duration-300 hover:bg-orange-500 text-white hover:border hover:border-solid hover:border-black hover:text-white  bg-orange-700 rounded-3xl  font-black flex justify-center items-center w-28 h-10 p-4 text-xl">
+               <NuxtLink to="/notes#controls-carousel">شهادتنا</NuxtLink>
+            </button>
          </div>
       </section>
 
