@@ -35,12 +35,30 @@ export const useStudents = defineStore("useStudents", {
     },
     actions: {
     // fetch students requests
-        async fetchStudentsRequests() {
-            const supabase = useSupabaseClient()
-            const { data } = await supabase.from("students_request").select("*").order("created_at", { ascending: false });
-
-            this.studentsRequests = data
-        },
+    async fetchStudentsRequests() {
+        const supabase = useSupabaseClient();
+    
+        try {
+            const { data, error } = await supabase
+                .from("students_request")
+                .select("*")
+                .order("created_at", { ascending: false });
+    
+            if (error) {
+                console.error("Error fetching student requests:", error.message);
+                this.studentsRequests = []; // Set to empty array if there's an error
+            } else if (data) {
+                this.studentsRequests = data; // Assign the fetched data
+            } else {
+                console.warn("No data found in students_request table.");
+                this.studentsRequests = []; // Set to empty array if no data
+            }
+        } catch (err) {
+            console.error("Unexpected error:", err.message);
+            this.studentsRequests = []; // Handle unexpected errors
+        }
+    },
+    
 
     // fetch registered students 
 
