@@ -29,7 +29,7 @@ const route = useRoute()
 
 // Compute a dynamic title in Arabic
 const dynamicTitle = computed(() => {
-  const path = route.path.replace('/', '') || 'home'
+  const path = route.path.replace('/', '') || 'المعتمد'
   return translations[path] || 'غير معروف' // Default to "Unknown" if no match
 })
 
