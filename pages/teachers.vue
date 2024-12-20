@@ -11,7 +11,7 @@
                     </div>
                     <p class="mb-3 font-normal ">{{teacher.teacher_description}}</p>
                 </div>
-                <div v-if="user" class="flex justify-around items-center mb-5 text-white">
+                <div v-if="user && user.email == 'hsenmhmd1022@gmail.com'" class="flex justify-around items-center mb-5 text-white">
                     <button class="p-2 px-4 bg-red-700 rounded" @click="useStudent.deleteTeacher(teacher.id)">حذف</button>
                     <button class="p-2 px-4 bg-green-800 rounded" @click="openEditModal(teacher)">تعديل</button>
                 </div>
