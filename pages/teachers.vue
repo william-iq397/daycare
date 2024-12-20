@@ -1,5 +1,5 @@
 <template>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 place-items-center">
             <!-- <TeacherCard  class="mx-auto" /> -->
             <div v-for="teacher in useStudent.teachers" :teacher="teacher" :key="teacher.id" class="max-w-2xl text-black border border-gray-200 rounded-lg shadow bg-[#FFCFAE] dark:border-gray-700 flex flex-col justify-between">
                 <div class="h-1/2 w-full">
@@ -9,7 +9,7 @@
                     <div>
                         <h5 class="mb-2 text-2xl font-bold tracking-tight ">{{ teacher.teacher_name }}</h5>
                     </div>
-                    <p class="mb-3 font-normal ">{{teacher.teacher_description}}</p>
+                    <p class="mb-3 font-normal white-space:pre-wrap">{{teacher.teacher_description}}</p>
                 </div>
                 <div v-if="user && user.email == 'hsenmhmd1022@gmail.com'" class="flex justify-around items-center mb-5 text-white">
                     <button class="p-2 px-4 bg-red-700 rounded" @click="useStudent.deleteTeacher(teacher.id)">حذف</button>
