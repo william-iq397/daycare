@@ -36,11 +36,7 @@ const dynamicTitle = computed(() => {
 useHead(() => ({
   title: `${dynamicTitle.value}`,
   link: [
-    {
-      rel: 'icon',
-      type: 'image/x-icon',
-      href: './rainbow.png', // Path to your favicon
-    }
+  { rel: 'icon', type: 'image/png', href: '/icon.png' }
   ]
 }))
 </script>
