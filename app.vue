@@ -40,7 +40,7 @@ useHead(() => ({
     {
       rel: 'icon',
       type: 'image/x-icon',
-      href: '/rainbow.png', // Path to your favicon
+      href: 'public/rainbow.png', // Path to your favicon
       sizes: '220x220'
     }
   ]
