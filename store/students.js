@@ -44,12 +44,30 @@ export const useStudents = defineStore("useStudents", {
 
     // fetch registered students 
 
-        async fetchStudents() {
-            const supabase = useSupabaseClient()
-            const { data } = await supabase.from("students").select("*").order("created_at", { ascending: false });
-            
-            this.students = data
-        },
+    async fetchStudents() {
+        const supabase = useSupabaseClient();
+    
+        try {
+            const { data, error } = await supabase
+                .from("students")
+                .select("*")
+                .order("created_at", { ascending: false });
+    
+            if (error) {
+                console.error("Error fetching students:", error.message);
+                return;
+            }
+    
+            if (data) {
+                this.students = data;
+            } else {
+                console.warn("No students found.");
+            }
+        } catch (err) {
+            console.error("Unexpected error fetching students:", err);
+        }
+    },
+    
 
         // add new studnet
         async addStudent() {
@@ -149,13 +167,30 @@ export const useStudents = defineStore("useStudents", {
         // teachers functions
         async fetchTeachers() {
             const supabase = useSupabaseClient();
-            const { data, error } = await supabase
-            .from('teachers')
-            .select()
-            .order('created_at', { ascending: true })
-
-            this.teachers = data
+        
+            try {
+                const { data, error } = await supabase
+                    .from('teachers')
+                    .select("*")
+                    .order('created_at', { ascending: true });
+        
+                if (error) {
+                    console.error("Error fetching teachers:", error.message);
+                    return;
+                }
+        
+                // Handle empty data
+                if (data && data.length > 0) {
+                    this.teachers = data;
+                } else {
+                    console.warn("No teachers found. Displaying empty state.");
+                    this.teachers = []; // Set to an empty array to avoid errors
+                }
+            } catch (err) {
+                console.error("Unexpected error fetching teachers:", err);
+            }
         },
+        
 
         async addTeacher() {
             const supabase = useSupabaseClient();

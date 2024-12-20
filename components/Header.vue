@@ -41,7 +41,7 @@ const route = useRoute();
 const auth = useAuth()
 // ! TO DO 
 // add pagination
-
+// /teachers => change the admin email who can edit and delete
 
 // Pages for the navbar
 const pages = [
