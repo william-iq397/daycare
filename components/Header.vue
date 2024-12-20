@@ -42,6 +42,8 @@ const auth = useAuth()
 // ! TO DO 
 // add pagination
 // /teachers => change the admin email who can edit and delete
+// add emails for daycare
+
 
 // Pages for the navbar
 const pages = [

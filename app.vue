@@ -39,7 +39,7 @@ useHead(() => ({
     {
       rel: 'icon',
       type: 'image/x-icon',
-      href: './public/rainbow.png', // Path to your favicon
+      href: './rainbow.png', // Path to your favicon
     }
   ]
 }))
