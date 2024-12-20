@@ -12,7 +12,6 @@ import { useHead } from '#app'
 
 // Define the Arabic translation map
 const translations = {
-  home: 'الصفحة الرئيسية',
   branches: 'الفروع',
   notes: 'الملاحظات',
   teachers: 'المعلمين',
@@ -30,7 +29,7 @@ const route = useRoute()
 // Compute a dynamic title in Arabic
 const dynamicTitle = computed(() => {
   const path = route.path.replace('/', '') || 'المعتمد'
-  return translations[path] || 'غير معروف' // Default to "Unknown" if no match
+  return translations[path] || 'الصفحة الرئيسية' // Default to "Unknown" if no match
 })
 
 // Update the browser tab title dynamically in Arabic
